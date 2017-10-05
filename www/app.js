@@ -21,7 +21,18 @@ new Vue({
 	}
 });
 
-},{"./views/App.vue":2,"./views/Main.vue":3,"vue":9,"vue-router":8}],2:[function(require,module,exports){
+},{"./views/App.vue":3,"./views/Main.vue":4,"vue":10,"vue-router":9}],2:[function(require,module,exports){
+module.exports={
+  "0": {"x": 58, "y": 95},
+  "1": {"x": 60, "y": 125},
+  "2": {"x": 70, "y": 150},
+  "3": {"x": 58, "y": 30},
+  "4": {"x": 60, "y": 50},
+  "5": {"x": 60, "y": 40},
+  "6": {"x": 70, "y": 80}
+}
+
+},{}],3:[function(require,module,exports){
 var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("html, body {\n  margin: 0;\n  padding: 0;\n  overflow: hidden;\n}")
 ;(function(){
 'use strict';
@@ -50,7 +61,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
     hotAPI.rerender("data-v-fc265d8e", __vue__options__)
   }
 })()}
-},{"./Navigation.vue":5,"vue":9,"vue-hot-reload-api":7,"vueify/lib/insert-css":10}],3:[function(require,module,exports){
+},{"./Navigation.vue":6,"vue":10,"vue-hot-reload-api":8,"vueify/lib/insert-css":11}],4:[function(require,module,exports){
 var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".card[data-v-783136d1] {\n  width: 100%;\n  height: 70vh;\n  margin-top: 100px;\n  overflow: hidden;\n}")
 ;(function(){
 'use strict';
@@ -80,23 +91,65 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
     hotAPI.rerender("data-v-783136d1", __vue__options__)
   }
 })()}
-},{"./MapForests.vue":4,"vue":9,"vue-hot-reload-api":7,"vueify/lib/insert-css":10}],4:[function(require,module,exports){
+},{"./MapForests.vue":5,"vue":10,"vue-hot-reload-api":8,"vueify/lib/insert-css":11}],5:[function(require,module,exports){
 var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("#map {\n  height: 100%;\n}")
 ;(function(){
 'use strict';
 
+var markers = require('../markers');
+
 module.exports = {
+  data: function data() {
+    return {
+      markers: []
+    };
+  },
+
+  methods: {
+    addMarkers: function addMarkers(markers) {
+      var _this = this;
+
+      var count = 0;
+
+      var _loop = function _loop(key) {
+        var marker = new google.maps.Marker({
+          position: _this.getLatLng(markers[key]),
+          map: _this.map,
+          visible: false,
+          title: key,
+          icon: 'img/marker.png'
+        });
+
+        count++;
+        setTimeout(function () {
+          marker.visible = true;
+          marker.setAnimation(google.maps.Animation.DROP);
+        }, count * 200);
+
+        _this.markers.push(marker);
+      };
+
+      for (var key in markers) {
+        _loop(key);
+      }
+    },
+    getLatLng: function getLatLng(pos) {
+      return { lat: pos.x, lng: pos.y };
+    }
+  },
   mounted: function mounted() {
-    var _this = this;
+    var _this2 = this;
 
     window.initMap = function () {
-      _this.map = new google.maps.Map(document.getElementById('map'), {
+      _this2.map = new google.maps.Map(document.getElementById('map'), {
         center: { lat: 58, lng: 95 },
         zoom: 3,
         gestureHandling: 'none',
         mapTypeId: 'hybrid',
         disableDefaultUI: true
       });
+
+      _this2.addMarkers(markers);
     };
   }
 };
@@ -117,7 +170,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
     hotAPI.reload("data-v-6a7c8392", __vue__options__)
   }
 })()}
-},{"vue":9,"vue-hot-reload-api":7,"vueify/lib/insert-css":10}],5:[function(require,module,exports){
+},{"../markers":2,"vue":10,"vue-hot-reload-api":8,"vueify/lib/insert-css":11}],6:[function(require,module,exports){
 ;(function(){
 "use strict";
 
@@ -138,7 +191,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
     hotAPI.rerender("data-v-575655ac", __vue__options__)
   }
 })()}
-},{"vue":9,"vue-hot-reload-api":7}],6:[function(require,module,exports){
+},{"vue":10,"vue-hot-reload-api":8}],7:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -324,7 +377,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 var Vue // late bind
 var version
 var map = (window.__VUE_HOT_MAP__ = Object.create(null))
@@ -495,7 +548,7 @@ exports.reload = tryWrap(function (id, options) {
   })
 })
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 (function (process){
 /**
   * vue-router v2.7.0
@@ -3006,7 +3059,7 @@ if (inBrowser && window.Vue) {
 module.exports = VueRouter;
 
 }).call(this,require('_process'))
-},{"_process":6}],9:[function(require,module,exports){
+},{"_process":7}],10:[function(require,module,exports){
 (function (process,global){
 /*!
  * Vue.js v2.4.4
@@ -13202,7 +13255,7 @@ Vue$3.compile = compileToFunctions;
 module.exports = Vue$3;
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"_process":6}],10:[function(require,module,exports){
+},{"_process":7}],11:[function(require,module,exports){
 var inserted = exports.cache = {}
 
 function noop () {}
