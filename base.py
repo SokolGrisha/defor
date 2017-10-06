@@ -1,13 +1,13 @@
 import redis 
 import json
+import os
 
 class Base:
-	def __init__(self):
-		self.redis = redis.from_url(os.environ.get("REDIS_URL","redis://localhost:6379"))
+    def __init__(self):
+        self.redis = redis.from_url(os.environ.get("REDIS_URL","redis://localhost:6379"))
 
 
-	def set(self, field, value, **kwargs):
-        key = field
+    def set(self, key, value, **kwargs):
         value = json.dumps(value)
         self.redis.set(key, value, kwargs)
 
