@@ -25,16 +25,8 @@
 </script>
 
 <style scoped>
-  .container {
-    display: flex;
-    justify-content: center;
-    align-self: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-  }
   .card {
     width: 70%;
-    margin-top: -40px;
+    margin: 50px auto;
   }
 </style>

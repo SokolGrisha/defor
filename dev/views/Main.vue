@@ -25,6 +25,5 @@
     width: 100%;
     height: 70vh;
     margin-top: 100px;
-    overflow: hidden;
   }
 </style>

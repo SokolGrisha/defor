@@ -2,7 +2,7 @@
   <nav>
    <div class="nav-wrapper green darken-2">
      <div class="center-align">
-       <a href="/" class="breadcrumb">DeForest</a>
+       <a href="https://azbang.github.io/DeForestClient/www/" class="breadcrumb">DeForest</a>
        <a v-show="isForest" class="breadcrumb">{{hash}}</a>
      </div>
    </div>
@@ -25,9 +25,3 @@
     }
   }
 </script>
-
-<style scoped>
-  span {
-    text-align: center;
-  }
-</style>

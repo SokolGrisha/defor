@@ -43,7 +43,6 @@ module.exports = {
 };
 
 },{}],4:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("html, body {\n  margin: 0;\n  padding: 0;\n  overflow: hidden;\n}\n\n#app {\n  width: 100vw;\n  height: 100vh;\n  overflow: hidden;\n}")
 ;(function(){
 'use strict';
 
@@ -64,14 +63,13 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   module.hot.accept()
-  module.hot.dispose(__vueify_style_dispose__)
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-fc265d8e", __vue__options__)
   } else {
     hotAPI.rerender("data-v-fc265d8e", __vue__options__)
   }
 })()}
-},{"./Navigation.vue":9,"vue":13,"vue-hot-reload-api":11,"vueify/lib/insert-css":14}],5:[function(require,module,exports){
+},{"./Navigation.vue":9,"vue":13,"vue-hot-reload-api":11}],5:[function(require,module,exports){
 var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("a.btn-floating[data-v-7da0e18e] {\n  position: absolute;\n  bottom: 25px;\n  right: 25px;\n}")
 ;(function(){
 'use strict';
@@ -115,7 +113,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   }
 })()}
 },{"../store":3,"vue":13,"vue-hot-reload-api":11,"vueify/lib/insert-css":14}],6:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".container[data-v-42610996] {\n  display: flex;\n  justify-content: center;\n  align-self: center;\n  align-items: center;\n  width: 100%;\n  height: 100%;\n}\n.card[data-v-42610996] {\n  width: 70%;\n  margin-top: -40px;\n}")
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".card[data-v-42610996] {\n  width: 70%;\n  margin: 50px auto;\n}")
 ;(function(){
 "use strict";
 
@@ -145,7 +143,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   }
 })()}
 },{"vue":13,"vue-hot-reload-api":11,"vueify/lib/insert-css":14}],7:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".card[data-v-783136d1] {\n  width: 100%;\n  height: 70vh;\n  margin-top: 100px;\n  overflow: hidden;\n}")
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".card[data-v-783136d1] {\n  width: 100%;\n  height: 70vh;\n  margin-top: 100px;\n}")
 ;(function(){
 'use strict';
 
@@ -263,7 +261,6 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   }
 })()}
 },{"../markers":2,"vue":13,"vue-hot-reload-api":11,"vueify/lib/insert-css":14}],9:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("span[data-v-575655ac] {\n  text-align: center;\n}")
 ;(function(){
 "use strict";
 
@@ -286,21 +283,19 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('nav',[_c('div',{staticClass:"nav-wrapper green darken-2"},[_c('div',{staticClass:"center-align"},[_c('a',{staticClass:"breadcrumb",attrs:{"href":"/"}},[_vm._v("DeForest")]),_vm._v(" "),_c('a',{directives:[{name:"show",rawName:"v-show",value:(_vm.isForest),expression:"isForest"}],staticClass:"breadcrumb"},[_vm._v(_vm._s(_vm.hash))])])])])}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('nav',[_c('div',{staticClass:"nav-wrapper green darken-2"},[_c('div',{staticClass:"center-align"},[_c('a',{staticClass:"breadcrumb",attrs:{"href":"https://azbang.github.io/DeForestClient/www/"}},[_vm._v("DeForest")]),_vm._v(" "),_c('a',{directives:[{name:"show",rawName:"v-show",value:(_vm.isForest),expression:"isForest"}],staticClass:"breadcrumb"},[_vm._v(_vm._s(_vm.hash))])])])])}
 __vue__options__.staticRenderFns = []
-__vue__options__._scopeId = "data-v-575655ac"
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   module.hot.accept()
-  module.hot.dispose(__vueify_style_dispose__)
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-575655ac", __vue__options__)
   } else {
     hotAPI.rerender("data-v-575655ac", __vue__options__)
   }
 })()}
-},{"vue":13,"vue-hot-reload-api":11,"vueify/lib/insert-css":14}],10:[function(require,module,exports){
+},{"vue":13,"vue-hot-reload-api":11}],10:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
