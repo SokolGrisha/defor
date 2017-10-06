@@ -6,11 +6,14 @@ var VueRouter = require('vue-router');
 
 var App = require('./views/App.vue');
 var Main = require('./views/Main.vue');
+var Forest = require('./views/Forest.vue');
 
 Vue.use(VueRouter);
 
 var router = new VueRouter({
-	routes: [{ path: '*', redirect: '/main' }, { path: '/', component: Main }]
+	routes: [{ path: '*', redirect: '/main' }, { path: '/', component: Main }, { path: '/forest', component: Forest, props: function props(route) {
+			return { hash: route.query.hash };
+		} }]
 });
 
 new Vue({
@@ -21,7 +24,7 @@ new Vue({
 	}
 });
 
-},{"./views/App.vue":3,"./views/Main.vue":4,"vue":10,"vue-router":9}],2:[function(require,module,exports){
+},{"./views/App.vue":4,"./views/Forest.vue":6,"./views/Main.vue":7,"vue":13,"vue-router":12}],2:[function(require,module,exports){
 module.exports={
   "0": {"x": 58, "y": 95},
   "1": {"x": 60, "y": 125},
@@ -33,7 +36,13 @@ module.exports={
 }
 
 },{}],3:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("html, body {\n  margin: 0;\n  padding: 0;\n  overflow: hidden;\n}")
+'use strict';
+
+module.exports = {
+  key: ''
+};
+
+},{}],4:[function(require,module,exports){
 ;(function(){
 'use strict';
 
@@ -54,30 +63,104 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   module.hot.accept()
-  module.hot.dispose(__vueify_style_dispose__)
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-fc265d8e", __vue__options__)
   } else {
     hotAPI.rerender("data-v-fc265d8e", __vue__options__)
   }
 })()}
-},{"./Navigation.vue":6,"vue":10,"vue-hot-reload-api":8,"vueify/lib/insert-css":11}],4:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".card[data-v-783136d1] {\n  width: 100%;\n  height: 70vh;\n  margin-top: 100px;\n  overflow: hidden;\n}")
+},{"./Navigation.vue":9,"vue":13,"vue-hot-reload-api":11}],5:[function(require,module,exports){
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("a.btn-floating[data-v-7da0e18e] {\n  position: absolute;\n  bottom: 25px;\n  right: 25px;\n}")
 ;(function(){
 'use strict';
 
-var MapForests = require('./MapForests.vue');
+var store = require('../store');
 
 module.exports = {
-  components: {
-    MapForests: MapForests
+  data: function data() {
+    return {
+      key: ''
+    };
+  },
+
+  methods: {
+    enterKey: function enterKey() {
+      store.ethereumKey = this.key;
+      $('#ethereum-key-modal').modal('close');
+    }
+  },
+  mounted: function mounted() {
+    $('.modal').modal();
+    $('#ethereum-key-modal').modal('open');
   }
 };
 })()
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"container"},[_c('div',{staticClass:"card"},[_c('map-forests')],1)])}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('div',{staticClass:"modal",attrs:{"id":"ethereum-key-modal"}},[_c('div',{staticClass:"modal-content"},[_c('h4',[_vm._v("Ethereum ключ")]),_vm._v(" "),_c('p',[_vm._v("Введите ваш Ethereum ключ, чтобы получить доступ к информации о лесах.")]),_vm._v(" "),_c('form',{staticClass:"col s12",on:{"submit":function($event){$event.preventDefault();_vm.enterKey($event)}}},[_c('div',{staticClass:"input-field"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.key),expression:"key"}],staticClass:"validate",attrs:{"id":"ethereum-key","autocomplete":"off","data-error":"wrong","placeholder":"Введите ключ","data-success":"right"},domProps:{"value":(_vm.key)},on:{"input":function($event){if($event.target.composing){ return; }_vm.key=$event.target.value}}})])])])]),_vm._v(" "),_vm._m(0)])}
+__vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('a',{staticClass:"btn-floating btn-large waves-effect waves-light red modal-trigger",attrs:{"href":"#ethereum-key-modal"}},[_c('i',{staticClass:"material-icons"},[_vm._v("account_balance_wallet")])])}]
+__vue__options__._scopeId = "data-v-7da0e18e"
+if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  module.hot.dispose(__vueify_style_dispose__)
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-7da0e18e", __vue__options__)
+  } else {
+    hotAPI.rerender("data-v-7da0e18e", __vue__options__)
+  }
+})()}
+},{"../store":3,"vue":13,"vue-hot-reload-api":11,"vueify/lib/insert-css":14}],6:[function(require,module,exports){
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".card[data-v-42610996] {\n  width: 70%;\n  margin: 50px auto;\n}")
+;(function(){
+"use strict";
+
+module.exports = {
+  data: function data() {
+    return {
+      hash: this.$route.query.hash
+    };
+  }
+};
+})()
+if (module.exports.__esModule) module.exports = module.exports.default
+var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
+if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"container"},[_c('div',{staticClass:"card"},[_c('div',{staticClass:"card-image"},[_c('img',{attrs:{"src":"img/forest.jpg"}}),_vm._v(" "),_c('span',{staticClass:"card-title"},[_vm._v("Хеш: "+_vm._s(_vm.hash))])]),_vm._v(" "),_vm._m(0)])])}
+__vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"card-content"},[_c('p',[_vm._v("Дата: 24 декабря, 2020 года")]),_vm._v(" "),_c('p',[_vm._v("Долгота: 35*")]),_vm._v(" "),_c('p',[_vm._v("Ширина: 135*")])])}]
+__vue__options__._scopeId = "data-v-42610996"
+if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  module.hot.dispose(__vueify_style_dispose__)
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-42610996", __vue__options__)
+  } else {
+    hotAPI.rerender("data-v-42610996", __vue__options__)
+  }
+})()}
+},{"vue":13,"vue-hot-reload-api":11,"vueify/lib/insert-css":14}],7:[function(require,module,exports){
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".card[data-v-783136d1] {\n  width: 100%;\n  height: 70vh;\n  margin-top: 100px;\n}")
+;(function(){
+'use strict';
+
+var MapForests = require('./MapForests.vue');
+var EthereumModal = require('./EthereumModal.vue');
+
+module.exports = {
+  components: {
+    MapForests: MapForests,
+    EthereumModal: EthereumModal
+  }
+};
+})()
+if (module.exports.__esModule) module.exports = module.exports.default
+var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
+if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"container"},[_c('div',{staticClass:"card"},[_c('map-forests')],1),_vm._v(" "),_c('ethereum-modal')],1)}
 __vue__options__.staticRenderFns = []
 __vue__options__._scopeId = "data-v-783136d1"
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
@@ -91,7 +174,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
     hotAPI.rerender("data-v-783136d1", __vue__options__)
   }
 })()}
-},{"./MapForests.vue":5,"vue":10,"vue-hot-reload-api":8,"vueify/lib/insert-css":11}],5:[function(require,module,exports){
+},{"./EthereumModal.vue":5,"./MapForests.vue":8,"vue":13,"vue-hot-reload-api":11,"vueify/lib/insert-css":14}],8:[function(require,module,exports){
 var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("#map {\n  height: 100%;\n}")
 ;(function(){
 'use strict';
@@ -122,10 +205,13 @@ module.exports = {
 
         count++;
         setTimeout(function () {
-          marker.visible = true;
           marker.setAnimation(google.maps.Animation.DROP);
-        }, count * 200);
+          marker.visible = true;
+        }, count * 700);
 
+        marker.addListener('click', function () {
+          _this.$router.push({ path: 'forest', query: { hash: key } });
+        });
         _this.markers.push(marker);
       };
 
@@ -144,7 +230,11 @@ module.exports = {
       _this2.map = new google.maps.Map(document.getElementById('map'), {
         center: { lat: 58, lng: 95 },
         zoom: 3,
-        gestureHandling: 'none',
+        scrollwheel: false,
+        navigationControl: false,
+        mapTypeControl: false,
+        scaleControl: false,
+        draggable: false,
         mapTypeId: 'hybrid',
         disableDefaultUI: true
       });
@@ -167,20 +257,34 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-6a7c8392", __vue__options__)
   } else {
-    hotAPI.reload("data-v-6a7c8392", __vue__options__)
+    hotAPI.rerender("data-v-6a7c8392", __vue__options__)
   }
 })()}
-},{"../markers":2,"vue":10,"vue-hot-reload-api":8,"vueify/lib/insert-css":11}],6:[function(require,module,exports){
+},{"../markers":2,"vue":13,"vue-hot-reload-api":11,"vueify/lib/insert-css":14}],9:[function(require,module,exports){
 ;(function(){
 "use strict";
 
-module.exports = {};
+module.exports = {
+  data: function data() {
+    return {
+      isForest: false
+    };
+  },
+
+  computed: {
+    hash: function hash() {
+      var hash = this.$route.query.hash;
+      this.isForest = hash != null ? true : false;
+      return hash;
+    }
+  }
+};
 })()
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _vm._m(0)}
-__vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('nav',[_c('div',{staticClass:"nav-wrapper green darken-2"},[_c('a',{staticClass:"brand-logo center",attrs:{"href":"#"}},[_vm._v("DeForest")])])])}]
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('nav',[_c('div',{staticClass:"nav-wrapper green darken-2"},[_c('div',{staticClass:"center-align"},[_c('a',{staticClass:"breadcrumb",attrs:{"href":"https://azbang.github.io/DeForestClient/www/"}},[_vm._v("DeForest")]),_vm._v(" "),_c('a',{directives:[{name:"show",rawName:"v-show",value:(_vm.isForest),expression:"isForest"}],staticClass:"breadcrumb"},[_vm._v(_vm._s(_vm.hash))])])])])}
+__vue__options__.staticRenderFns = []
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
@@ -191,7 +295,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
     hotAPI.rerender("data-v-575655ac", __vue__options__)
   }
 })()}
-},{"vue":10,"vue-hot-reload-api":8}],7:[function(require,module,exports){
+},{"vue":13,"vue-hot-reload-api":11}],10:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -377,7 +481,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],8:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 var Vue // late bind
 var version
 var map = (window.__VUE_HOT_MAP__ = Object.create(null))
@@ -548,7 +652,7 @@ exports.reload = tryWrap(function (id, options) {
   })
 })
 
-},{}],9:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 (function (process){
 /**
   * vue-router v2.7.0
@@ -3059,7 +3163,7 @@ if (inBrowser && window.Vue) {
 module.exports = VueRouter;
 
 }).call(this,require('_process'))
-},{"_process":7}],10:[function(require,module,exports){
+},{"_process":10}],13:[function(require,module,exports){
 (function (process,global){
 /*!
  * Vue.js v2.4.4
@@ -13255,7 +13359,7 @@ Vue$3.compile = compileToFunctions;
 module.exports = Vue$3;
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"_process":7}],11:[function(require,module,exports){
+},{"_process":10}],14:[function(require,module,exports){
 var inserted = exports.cache = {}
 
 function noop () {}
