@@ -25,10 +25,13 @@
 
           count++;
           setTimeout(() => {
-            marker.visible = true;
             marker.setAnimation(google.maps.Animation.DROP);
-          }, count*200);
+            marker.visible = true;
+          }, count*700);
 
+          marker.addListener('click', () => {
+            this.$router.push({ path: 'forest', query: { hash: key }})
+          });
           this.markers.push(marker);
         }
       },
@@ -41,7 +44,11 @@
         this.map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: 58, lng: 95},
           zoom: 3,
-          gestureHandling: 'none',
+          scrollwheel: false,
+          navigationControl: false,
+          mapTypeControl: false,
+          scaleControl: false,
+          draggable: false,
           mapTypeId: 'hybrid',
           disableDefaultUI: true
         });
