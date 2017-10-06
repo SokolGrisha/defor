@@ -1,10 +1,10 @@
-from flask import Flask, request
+from flask import Flask, request, render_template
 from base import Base
 import json
 import hashlib
 
 def hash_string(string):
-    return hashlib.sha256(string.encode('utf-8')).hexdigest()
+	return hashlib.sha256(string.encode('utf-8')).hexdigest()
 
 app = Flask(__name__)
 database = Base()
@@ -49,6 +49,11 @@ def add_info():
 	database.set("points", points)
 
 	return "ok", 200
+
+
+@app.route("/")
+def index():
+	return render_template('index.html')
 
 
 if __name__ == "__main__":
