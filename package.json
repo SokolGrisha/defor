@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "author": "azbang",
+  "scripts": {
+    "build" : "gulp && python app.py"
+  },
   "dependencies": {
     "vinyl-source-stream": "^1.1.0",
     "vue": "^2.3.3",

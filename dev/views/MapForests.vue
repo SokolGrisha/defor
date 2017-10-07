@@ -20,7 +20,7 @@
             map: this.map,
             visible: false,
             title: key,
-            icon: 'img/marker.png'
+            icon: 'static/img/marker.png'
           });
 
           count++;
@@ -48,7 +48,7 @@
           navigationControl: false,
           mapTypeControl: false,
           scaleControl: false,
-          draggable: false,
+          draggable: true,
           mapTypeId: 'hybrid',
           disableDefaultUI: true
         });

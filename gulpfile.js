@@ -36,4 +36,4 @@ gulp.task('watch', () => {
 });
 
 
-gulp.task('default', ['dev', 'watch']);
+gulp.task('default', ['dev']);

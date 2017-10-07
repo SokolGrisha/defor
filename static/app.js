@@ -200,7 +200,7 @@ module.exports = {
           map: _this.map,
           visible: false,
           title: key,
-          icon: 'img/marker.png'
+          icon: 'static/img/marker.png'
         });
 
         count++;
@@ -234,7 +234,7 @@ module.exports = {
         navigationControl: false,
         mapTypeControl: false,
         scaleControl: false,
-        draggable: false,
+        draggable: true,
         mapTypeId: 'hybrid',
         disableDefaultUI: true
       });
