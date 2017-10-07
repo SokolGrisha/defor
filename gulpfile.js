@@ -2,7 +2,6 @@
 
 const fs = require('fs');
 const gulp = require('gulp');
-const connect = require('gulp-connect');
 const uglify = require('gulp-uglify');
 const plumber = require('gulp-plumber');
 const notify = require('gulp-notify');
@@ -23,27 +22,18 @@ var errorMessage = () => {
 	})})
 }
 
-gulp.task('server', () => {
-	return connect.server({
-		port: 1338,
-		livereload: true,
-		root: './www'
-	});
-});
-
 gulp.task('dev', () => {
 	return browserify({ entries: 'dev/index.js'})
 		.transform(babelify, { presets: ['es2015'] })
 		.transform(vueify)
 		.bundle()
 		.pipe(source('app.js'))
-		.pipe(gulp.dest('./www'))
-		.pipe(connect.reload());
+		.pipe(gulp.dest('./static'))
 });
 
-gulp.task('watch', function() {
+gulp.task('watch', () => {
 	gulp.watch('./dev/**/*.*', ['dev']);
 });
 
 
-gulp.task('default', ['dev', 'watch', 'server']);
+gulp.task('default', ['dev', 'watch']);

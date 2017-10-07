@@ -66,7 +66,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-fc265d8e", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-fc265d8e", __vue__options__)
+    hotAPI.reload("data-v-fc265d8e", __vue__options__)
   }
 })()}
 },{"./Navigation.vue":9,"vue":13,"vue-hot-reload-api":11}],5:[function(require,module,exports){
@@ -109,7 +109,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-7da0e18e", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-7da0e18e", __vue__options__)
+    hotAPI.reload("data-v-7da0e18e", __vue__options__)
   }
 })()}
 },{"../store":3,"vue":13,"vue-hot-reload-api":11,"vueify/lib/insert-css":14}],6:[function(require,module,exports){
@@ -139,7 +139,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-42610996", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-42610996", __vue__options__)
+    hotAPI.reload("data-v-42610996", __vue__options__)
   }
 })()}
 },{"vue":13,"vue-hot-reload-api":11,"vueify/lib/insert-css":14}],7:[function(require,module,exports){
@@ -171,7 +171,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-783136d1", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-783136d1", __vue__options__)
+    hotAPI.reload("data-v-783136d1", __vue__options__)
   }
 })()}
 },{"./EthereumModal.vue":5,"./MapForests.vue":8,"vue":13,"vue-hot-reload-api":11,"vueify/lib/insert-css":14}],8:[function(require,module,exports){
@@ -257,7 +257,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-6a7c8392", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-6a7c8392", __vue__options__)
+    hotAPI.reload("data-v-6a7c8392", __vue__options__)
   }
 })()}
 },{"../markers":2,"vue":13,"vue-hot-reload-api":11,"vueify/lib/insert-css":14}],9:[function(require,module,exports){
@@ -292,7 +292,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-575655ac", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-575655ac", __vue__options__)
+    hotAPI.reload("data-v-575655ac", __vue__options__)
   }
 })()}
 },{"vue":13,"vue-hot-reload-api":11}],10:[function(require,module,exports){
