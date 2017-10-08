@@ -15,7 +15,7 @@ class Base:
 
 
     def get(self, field, default=None):
-        key = field
+        key = "deforest:%s"%key
         value = self.redis.get(key)
         if type(value) is bytes: value = value.decode('utf-8')
             
