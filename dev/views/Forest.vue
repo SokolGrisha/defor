@@ -8,7 +8,7 @@
       <div class="card-content">
         <p>Дата: {{data.date}}</p>
         <p>Долгота: {{data.x}}*</p>
-        <p>Ширина: {{data.y}}*</p>
+        <p>Широта: {{data.y}}*</p>
       </div>
     </div>
   </div>
