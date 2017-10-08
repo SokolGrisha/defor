@@ -30,17 +30,19 @@ def get_info():
 
 @app.route("/add_info", methods = ["POST"])
 def add_info():
-	base64_image = request.form.get("image")
-	x, y =  request.form.get("x"), request.form.get("y")
-	date = request.form.get("image")
+	data = json.loads(request.data.decode("utf-8"))
+
+	base64_image = data.get("image")
+	x, y =  data.get("x"), data.get("y")
+	date = data.get("image")
 	points = database.get("points", default=[])
 
-	h = hash_string(base64_image+x+y+date)
+	h = hash_string(base64_image+str(x)+str(y)+date)
 
 	info = {
 		"image": base64_image,
-		"x": int(x),
-		"y": int(y),
+		"x": x,
+		"y": y,
 		"date": date
 	}
 
