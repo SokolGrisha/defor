@@ -26,7 +26,7 @@
           count++;
           setTimeout(() => {
             marker.setAnimation(google.maps.Animation.DROP);
-            setTimeout(() => {marker.visible = true}, 10);
+            marker.visible = true;
           }, count*300);
 
           marker.addListener('click', () => {

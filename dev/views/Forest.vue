@@ -15,6 +15,8 @@
 </template>
 
 <script>
+  const options = require('../options');
+
   module.exports = {
     data() {
       return {
