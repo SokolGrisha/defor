@@ -13,10 +13,15 @@ database = Base()
 @app.route("/get_points")
 def get_points():
 	points = database.get("points", default=[])
-	points = dict(zip(list(range(len(points))), points))
+	result = {}
 
+	for point in points:
+		info = database.get("hash:%s" % point)
 
-	return json.dumps(points), 200
+		if info is  not None:	
+			result[point] = {"x":info["x"], "y":info["y"]}
+
+	return json.dumps(result), 200
 
 
 @app.route("/get_info")
@@ -41,8 +46,8 @@ def add_info():
 
 	info = {
 		"image": base64_image,
-		"x": x,
-		"y": y,
+		"x": int(x),
+		"y": int(y),
 		"date": date
 	}
 
