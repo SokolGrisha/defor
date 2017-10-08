@@ -4,11 +4,12 @@
   "description": "",
   "author": "azbang",
   "scripts": {
-    "build" : "gulp && python app.py"
+    "build": "gulp && python app.py"
   },
   "dependencies": {
     "vinyl-source-stream": "^1.1.0",
     "vue": "^2.3.3",
+    "vue-resource": "^1.3.4",
     "vue-router": "^2.5.3",
     "vuex": "^2.3.1"
   },

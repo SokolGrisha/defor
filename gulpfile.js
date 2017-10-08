@@ -4,6 +4,7 @@ const fs = require('fs');
 const gulp = require('gulp');
 const uglify = require('gulp-uglify');
 const plumber = require('gulp-plumber');
+const connect = require('gulp-connect');
 const notify = require('gulp-notify');
 const gulpIf = require('gulp-if');
 const browserify = require('browserify');
@@ -22,13 +23,23 @@ var errorMessage = () => {
 	})})
 }
 
+gulp.task('server', () => {
+	return connect.server({
+		port: 1338,
+		livereload: true,
+		root: './www'
+	});
+});
+
 gulp.task('dev', () => {
 	return browserify({ entries: 'dev/index.js'})
 		.transform(babelify, { presets: ['es2015'] })
 		.transform(vueify)
 		.bundle()
 		.pipe(source('app.js'))
+		.pipe(gulp.dest('./www'))
 		.pipe(gulp.dest('./static'))
+		.pipe(connect.reload());
 });
 
 gulp.task('watch', () => {
@@ -36,4 +47,4 @@ gulp.task('watch', () => {
 });
 
 
-gulp.task('default', ['dev']);
+gulp.task('default', ['dev', 'watch', 'server']);

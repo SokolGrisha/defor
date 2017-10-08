@@ -3,7 +3,7 @@
 </template>
 
 <script>
-  const markers = require('../markers');
+  const options = require('../options');
 
   module.exports = {
     data() {
@@ -20,14 +20,14 @@
             map: this.map,
             visible: false,
             title: key,
-            icon: 'static/img/marker.png'
+            icon: '../static/img/marker.png'
           });
 
           count++;
           setTimeout(() => {
             marker.setAnimation(google.maps.Animation.DROP);
-            marker.visible = true;
-          }, count*700);
+            setTimeout(() => {marker.visible = true}, 10);
+          }, count*300);
 
           marker.addListener('click', () => {
             this.$router.push({ path: 'forest', query: { hash: key }})
@@ -37,6 +37,13 @@
       },
       getLatLng(pos) {
         return {lat: pos.x, lng: pos.y};
+      },
+      loadMarkers() {
+        this.$http.get(options.api + '/get_points').then(response => {
+          this.addMarkers(response.body);
+        }, response => {
+          Materialize.toast('Не удалось загрузить маркеры.', 3000);
+        })
       }
     },
     mounted() {
@@ -53,7 +60,7 @@
           disableDefaultUI: true
         });
 
-        this.addMarkers(markers);
+        this.loadMarkers();
       }
     }
   }
