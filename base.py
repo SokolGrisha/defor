@@ -4,13 +4,13 @@ import os
 
 class Base:
     def __init__(self):
-        self.redis = redis.StrictRedis.from_url(os.environ.get("REDIS_URL","redis://localhost:6379"))
+        self.redis = redis.from_url(os.environ.get("REDIS_URL","redis://localhost:6379"))
 
 
     def set(self, key, value, **kwargs):
         value = json.dumps(value)
         key = "deforest:%s"%key
-        self.redis.set(key, value, kwargs)
+        self.redis.set(key, value, **kwargs)
 
 
 
