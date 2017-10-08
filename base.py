@@ -9,6 +9,7 @@ class Base:
 
     def set(self, key, value, **kwargs):
         value = json.dumps(value)
+        key = "deforest:%s"%key
         self.redis.set(key, value, kwargs)
 
 
