@@ -2,7 +2,7 @@
   <div id="forest" class="modal">
     <div class="card">
       <div class="card-image">
-        <img :src="data.image">
+        <div class="image" :style="{ backgroundImage: 'url(' + data.image + ')' }"></div>
       </div>
       <div class="card-content">
         <p class="flow-text">Дата: {{data.date | formatDate('MM/DD/YYYY, HH:mm:ss')}}</p>
@@ -19,7 +19,8 @@
   module.exports = {
     data() {
       return {
-        data: {}
+        data: {},
+        hash: ''
       }
     },
     filters: {
@@ -33,11 +34,16 @@
     },
     methods: {
       loadInfo(hash) {
+        this.hash = hash;
+
+        this.$emit('loading', true);
         this.$http.get(options.api + '/get_info', {params: {hash}}).then(response => {
           this.data = response.body;
           $('#forest').modal('open');
+          this.$emit('loading', false);
         }, response => {
           Materialize.toast('Не удалось загрузить информацию.', 3000);
+          this.$emit('loading', false);
         });
       }
     },
@@ -52,5 +58,17 @@
     background: none;
     box-shadow: none;
     overflow: hidden;
+  }
+  .image {
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: 500px;
+  }
+
+  @media (max-width: 480px) {
+    .image {
+      height: 250px;
+    }
   }
 </style>

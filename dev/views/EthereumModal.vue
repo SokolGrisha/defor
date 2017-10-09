@@ -31,7 +31,6 @@
       }
     },
     mounted() {
-      $('.modal').modal();
       $('#ethereum-key-modal').modal('open');
     }
   }

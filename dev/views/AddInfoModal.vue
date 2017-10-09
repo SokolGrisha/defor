@@ -43,6 +43,7 @@
           return;
         }
 
+        this.$emit('loading', true);
         $('#submitNewInfo').modal('close');
         this.$http.post(options.api + '/add_info', {
           x: this.x,
@@ -50,11 +51,16 @@
           date: +new Date,
           image: this.base64
         }).then(
-          response =>
-            Materialize.toast('Новый маркер создан!', 3000),
-
-          response =>
-            Materialize.toast('Не удалось создать новый маркер.', 3000)
+          response => {
+            Materialize.toast('Новый маркер создан!', 3000);
+            $('#add-info-modal').modal('close');
+            this.$emit('loading', false);
+          },
+          response => {
+            Materialize.toast('Не удалось создать новый маркер.', 3000);
+            this.$emit('loading', false);
+            $('#add-info-modal').modal('close');
+          }
         );
       },
       onFileChange(e) {
@@ -63,13 +69,12 @@
 
         var reader = new FileReader();
         reader.onload = (e) => {
+          this.$emit('loading', false);
           this.base64 = e.target.result;
         };
+        this.$emit('loading', true);
         reader.readAsDataURL(files[0]);
       }
-    },
-    mounted() {
-      $('.modal').modal();
     }
   }
 </script>

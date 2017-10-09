@@ -31,6 +31,10 @@
 
           marker.addListener('click', () => {
             this.$parent.$emit('loadInfo', key);
+            marker.setAnimation(google.maps.Animation.BOUNCE);
+            setTimeout(() => {
+              marker.setAnimation(null);
+            }, 1000);
           });
           this.markers.push(marker);
         }
@@ -39,10 +43,13 @@
         return {lat: pos.x, lng: pos.y};
       },
       loadMarkers() {
+        this.$emit('loading', true);
         this.$http.get(options.api + '/get_points').then(response => {
           this.addMarkers(response.body);
+          this.$emit('loading', false);
         }, response => {
           Materialize.toast('Не удалось загрузить маркеры.', 3000);
+          this.$emit('loading', false);
         })
       }
     },
@@ -70,5 +77,9 @@
   #map {
     height: 100%;
   }
-
+  @media (max-width: 480px) {
+    #map {
+      margin-top: -50px;
+    }
+  }
 </style>

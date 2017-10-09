@@ -4,13 +4,15 @@
 
     <div class="container">
       <div class="card">
-        <map-forests></map-forests>
+        <map-forests @loading="setLoading"></map-forests>
       </div>
     </div>
 
-    <forest></forest>
-    <ethereum-modal></ethereum-modal>
-    <add-info-modal></add-info-modal>
+    <forest @loading="setLoading"></forest>
+    <ethereum-modal @loading="setLoading"></ethereum-modal>
+    <add-info-modal @loading="setLoading"></add-info-modal>
+
+    <loader v-show="loading"></loader>
   </div>
 </template>
 
@@ -20,6 +22,7 @@
   const EthereumModal = require('./EthereumModal.vue');
   const MapForests = require('./MapForests.vue');
   const Forest = require('./Forest.vue');
+  const Loader = require('./Loader.vue');
 
 
   module.exports = {
@@ -28,7 +31,27 @@
       AddInfoModal,
       EthereumModal,
       MapForests,
-      Forest
+      Forest,
+      Loader
+    },
+    data() {
+      return {
+        loading: false
+      }
+    },
+    methods: {
+      setLoading(v) {
+        console.log(v);
+        this.loading = v;
+      }
+    },
+    mounted() {
+      $('.modal').modal({
+        inDuration: 300, // Transition in duration
+        outDuration: 200, // Transition out duration
+        startingTop: '4%', // Starting top style attribute
+        endingTop: '18%', // Ending top style attribute
+      });
     }
   }
 </script>
