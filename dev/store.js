@@ -8,7 +8,7 @@ module.exports = {
     ethAPI: new EthAPI(ethContract.adress, ethContract.contract),
     ethKey: '',
     ethAdress: '',
-    rootApi: 'http://127.0.0.1:5000',
+    rootApi: '',
     loading: false,
     markers: {},
     info: {}
