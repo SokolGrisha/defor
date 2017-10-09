@@ -1,14 +1,13 @@
 <template>
-  <div class="container">
+  <div id="forest" class="modal">
     <div class="card">
       <div class="card-image">
         <img :src="data.image">
-        <span class="card-title">Хеш: {{hash}}</span>
       </div>
       <div class="card-content">
-        <p>Дата: {{data.date}}</p>
-        <p>Долгота: {{data.x}}*</p>
-        <p>Широта: {{data.y}}*</p>
+        <p class="flow-text">Дата: {{data.date | formatDate('MM/DD/YYYY, HH:mm:ss')}}</p>
+        <p class="flow-text">Долгота: {{data.x}}°</p>
+        <p class="flow-text">Широта: {{data.y}}°</p>
       </div>
     </div>
   </div>
@@ -20,23 +19,38 @@
   module.exports = {
     data() {
       return {
-        hash: this.$route.query.hash,
         data: {}
       }
     },
+    filters: {
+      formatDate(date, template) {
+        var specs = 'YYYY:MM:DD:HH:mm:ss'.split(':');
+        date = new Date(date || Date.now() - new Date().getTimezoneOffset() * 6e4);
+        return date.toISOString().split(/[-:.TZ]/).reduce(function(template, item, i) {
+          return template.split(specs[i]).join(item);
+        }, template);
+      }
+    },
+    methods: {
+      loadInfo(hash) {
+        this.$http.get(options.api + '/get_info', {params: {hash}}).then(response => {
+          this.data = response.body;
+          $('#forest').modal('open');
+        }, response => {
+          Materialize.toast('Не удалось загрузить информацию.', 3000);
+        });
+      }
+    },
     mounted() {
-      this.$http.get(options.api + '/get_info', {params: {hash: this.hash}}).then(response => {
-        this.data = response.body;
-      }, response => {
-        Materialize.toast('Не удалось загрузить информацию.', 3000);
-      });
+      this.$parent.$on('loadInfo', this.loadInfo);
     }
   }
 </script>
 
 <style scoped>
-  .card {
-    width: 70%;
-    margin: 50px auto;
+  .modal {
+    background: none;
+    box-shadow: none;
+    overflow: hidden;
   }
 </style>

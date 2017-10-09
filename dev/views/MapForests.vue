@@ -25,12 +25,12 @@
 
           count++;
           setTimeout(() => {
-            marker.setAnimation(google.maps.Animation.DROP);
+            marker.setAnimation(google.maps.Animation.Zo);
             marker.visible = true;
           }, count*300);
 
           marker.addListener('click', () => {
-            this.$router.push({ path: 'forest', query: { hash: key }})
+            this.$parent.$emit('loadInfo', key);
           });
           this.markers.push(marker);
         }
@@ -70,4 +70,5 @@
   #map {
     height: 100%;
   }
+
 </style>

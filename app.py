@@ -41,16 +41,16 @@ def add_info():
 
 	base64_image = data.get("image")
 	x, y =  data.get("x"), data.get("y")
-	date = data.get("image")
+	date = data.get("date")
 	points = database.get("points", default=[])
 
-	h = hash_string(base64_image+str(x)+str(y)+date)
+	h = hash_string(base64_image+str(x)+str(y)+str(date))
 
 	info = {
 		"image": base64_image,
 		"x": int(x),
 		"y": int(y),
-		"date": date
+		"date": int(date)
 	}
 
 	points.append(h)
