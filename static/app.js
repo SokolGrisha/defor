@@ -29,7 +29,7 @@ new Vue({
 
 },{"./views/App.vue":5,"./views/Forest.vue":7,"./views/Main.vue":8,"vue":16,"vue-resource":14,"vue-router":15}],2:[function(require,module,exports){
 module.exports={
-  "api": ""
+  "api": "http://127.0.0.1:5000"
 }
 
 },{}],3:[function(require,module,exports){
@@ -104,7 +104,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-290c3596", __vue__options__)
   } else {
-    hotAPI.reload("data-v-290c3596", __vue__options__)
+    hotAPI.rerender("data-v-290c3596", __vue__options__)
   }
 })()}
 },{"../options.json":2,"vue":16,"vue-hot-reload-api":13,"vueify/lib/insert-css":17}],5:[function(require,module,exports){
@@ -135,7 +135,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-fc265d8e", __vue__options__)
   } else {
-    hotAPI.reload("data-v-fc265d8e", __vue__options__)
+    hotAPI.rerender("data-v-fc265d8e", __vue__options__)
   }
 })()}
 },{"./AddInfoModal.vue":4,"./EthereumModal.vue":6,"./Navigation.vue":10,"vue":16,"vue-hot-reload-api":13}],6:[function(require,module,exports){
@@ -178,7 +178,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-7da0e18e", __vue__options__)
   } else {
-    hotAPI.reload("data-v-7da0e18e", __vue__options__)
+    hotAPI.rerender("data-v-7da0e18e", __vue__options__)
   }
 })()}
 },{"../store":3,"vue":16,"vue-hot-reload-api":13,"vueify/lib/insert-css":17}],7:[function(require,module,exports){
@@ -220,7 +220,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-42610996", __vue__options__)
   } else {
-    hotAPI.reload("data-v-42610996", __vue__options__)
+    hotAPI.rerender("data-v-42610996", __vue__options__)
   }
 })()}
 },{"../options":2,"vue":16,"vue-hot-reload-api":13,"vueify/lib/insert-css":17}],8:[function(require,module,exports){
@@ -250,7 +250,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-783136d1", __vue__options__)
   } else {
-    hotAPI.reload("data-v-783136d1", __vue__options__)
+    hotAPI.rerender("data-v-783136d1", __vue__options__)
   }
 })()}
 },{"./MapForests.vue":9,"vue":16,"vue-hot-reload-api":13,"vueify/lib/insert-css":17}],9:[function(require,module,exports){
@@ -345,7 +345,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-6a7c8392", __vue__options__)
   } else {
-    hotAPI.reload("data-v-6a7c8392", __vue__options__)
+    hotAPI.rerender("data-v-6a7c8392", __vue__options__)
   }
 })()}
 },{"../options":2,"vue":16,"vue-hot-reload-api":13,"vueify/lib/insert-css":17}],10:[function(require,module,exports){
@@ -380,7 +380,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-575655ac", __vue__options__)
   } else {
-    hotAPI.reload("data-v-575655ac", __vue__options__)
+    hotAPI.rerender("data-v-575655ac", __vue__options__)
   }
 })()}
 },{"vue":16,"vue-hot-reload-api":13}],11:[function(require,module,exports){

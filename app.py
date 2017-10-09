@@ -2,11 +2,13 @@ from flask import Flask, request, render_template
 from base import Base
 import json
 import hashlib
+from flask_cors import CORS
 
 def hash_string(string):
 	return hashlib.sha256(string.encode('utf-8')).hexdigest()
 
 app = Flask(__name__)
+CORS(app)
 database = Base()
 
 #handlers
@@ -18,7 +20,7 @@ def get_points():
 	for point in points:
 		info = database.get("hash:%s" % point)
 
-		if info is  not None:	
+		if info is  not None:
 			result[point] = {"x":info["x"], "y":info["y"]}
 
 	return json.dumps(result), 200
