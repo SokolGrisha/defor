@@ -5,9 +5,9 @@
         <h4>Новый маркер</h4>
         <div class="row">
             <div class="file-field input-field">
-              <div class="btn">
+              <div class="btn green">
                 <span>Фотография</span>
-                <input type="file" class="green" @change="onFileChange">
+                <input type="file" @change="onFileChange">
               </div>
               <div class="file-path-wrapper">
                 <input class="file-path validate" type="text">

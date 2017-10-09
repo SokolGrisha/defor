@@ -26,7 +26,7 @@
     },
     methods: {
       enterKey() {
-        store.ethereumKey = this.key;
+        this.$emit('setEthKey', this.key);
         $('#ethereum-key-modal').modal('close');
       }
     },

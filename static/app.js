@@ -180,7 +180,7 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('div',{staticClass:"modal",attrs:{"id":"add-info-modal"}},[_c('div',{staticClass:"modal-content"},[_c('h4',[_vm._v("Новый маркер")]),_vm._v(" "),_c('div',{staticClass:"row"},[_c('div',{staticClass:"file-field input-field"},[_c('div',{staticClass:"btn"},[_c('span',[_vm._v("Фотография")]),_vm._v(" "),_c('input',{staticClass:"green",attrs:{"type":"file"},on:{"change":_vm.onFileChange}})]),_vm._v(" "),_vm._m(0)]),_vm._v(" "),_c('div',{staticClass:"input-field сol s12"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.x),expression:"x"}],attrs:{"id":"x-coord","autocomplete":"off","placeholder":"Введите долготу"},domProps:{"value":(_vm.x)},on:{"input":function($event){if($event.target.composing){ return; }_vm.x=$event.target.value}}})]),_vm._v(" "),_c('div',{staticClass:"input-field сol s12"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.y),expression:"y"}],attrs:{"id":"y-coord","autocomplete":"off","placeholder":"Введите широту"},domProps:{"value":(_vm.y)},on:{"input":function($event){if($event.target.composing){ return; }_vm.y=$event.target.value}}})]),_vm._v(" "),_c('button',{staticClass:"btn waves-effect green",on:{"click":_vm.submitNewInfo}},[_vm._v("СОЗДАТЬ")])])])]),_vm._v(" "),_vm._m(1)])}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('div',{staticClass:"modal",attrs:{"id":"add-info-modal"}},[_c('div',{staticClass:"modal-content"},[_c('h4',[_vm._v("Новый маркер")]),_vm._v(" "),_c('div',{staticClass:"row"},[_c('div',{staticClass:"file-field input-field"},[_c('div',{staticClass:"btn green"},[_c('span',[_vm._v("Фотография")]),_vm._v(" "),_c('input',{attrs:{"type":"file"},on:{"change":_vm.onFileChange}})]),_vm._v(" "),_vm._m(0)]),_vm._v(" "),_c('div',{staticClass:"input-field сol s12"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.x),expression:"x"}],attrs:{"id":"x-coord","autocomplete":"off","placeholder":"Введите долготу"},domProps:{"value":(_vm.x)},on:{"input":function($event){if($event.target.composing){ return; }_vm.x=$event.target.value}}})]),_vm._v(" "),_c('div',{staticClass:"input-field сol s12"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.y),expression:"y"}],attrs:{"id":"y-coord","autocomplete":"off","placeholder":"Введите широту"},domProps:{"value":(_vm.y)},on:{"input":function($event){if($event.target.composing){ return; }_vm.y=$event.target.value}}})]),_vm._v(" "),_c('button',{staticClass:"btn waves-effect green",on:{"click":_vm.submitNewInfo}},[_vm._v("СОЗДАТЬ")])])])]),_vm._v(" "),_vm._m(1)])}
 __vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"file-path-wrapper"},[_c('input',{staticClass:"file-path validate",attrs:{"type":"text"}})])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('a',{staticClass:"btn-floating btn-large waves-effect waves-light red modal-trigger",attrs:{"href":"#add-info-modal"}},[_c('i',{staticClass:"material-icons"},[_vm._v("add")])])}]
 __vue__options__._scopeId = "data-v-290c3596"
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
@@ -195,7 +195,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   }
 })()}
 },{"../options.json":4,"vue":17,"vue-hot-reload-api":15,"vueify/lib/insert-css":18}],7:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".card[data-v-fc265d8e] {\n  width: 100%;\n  height: 70vh;\n  margin-top: 100px;\n}")
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".container[data-v-fc265d8e] {\n  margin-top: 100px;\n}\n.card[data-v-fc265d8e] {\n  width: 100%;\n  height: 70vh;\n}")
 ;(function(){
 'use strict';
 
@@ -276,7 +276,7 @@ module.exports = {
 
   methods: {
     enterKey: function enterKey() {
-      store.ethereumKey = this.key;
+      this.$emit('setEthKey', this.key);
       $('#ethereum-key-modal').modal('close');
     }
   },
@@ -490,21 +490,24 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   }
 })()}
 },{"../options":4,"vue":17,"vue-hot-reload-api":15,"vueify/lib/insert-css":18}],12:[function(require,module,exports){
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".container[data-v-575655ac] {\n  height: 100%;\n}\nform[data-v-575655ac] {\n  height: 64px;\n}\nlabel i[data-v-575655ac] {\n  margin-top: -10px;\n}")
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
 __vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _vm._m(0)}
-__vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('nav',[_c('div',{staticClass:"nav-wrapper green darken-2"},[_c('div',{staticClass:"center-align"},[_c('a',{staticClass:"breadcrumb"},[_vm._v("DeForest")])])])])}]
+__vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('nav',[_c('div',{staticClass:"nav-wrapper green darken-2"},[_c('div',{staticClass:"container"},[_c('div',{staticClass:"row"},[_c('div',{staticClass:"col s8"},[_c('a',{staticClass:"brand-logo"},[_vm._v("DeForest")])]),_vm._v(" "),_c('div',{staticClass:"col s4"},[_c('form',[_c('div',{staticClass:"input-field"},[_c('input',{attrs:{"id":"search","type":"search","placeholder":"Введите x и y координату для поиска"}}),_vm._v(" "),_c('label',{staticClass:"label-icon",attrs:{"for":"search"}},[_c('i',{staticClass:"material-icons"},[_vm._v("search")])]),_vm._v(" "),_c('i',{staticClass:"material-icons"},[_vm._v("close")])])])])])])])])}]
+__vue__options__._scopeId = "data-v-575655ac"
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   module.hot.accept()
+  module.hot.dispose(__vueify_style_dispose__)
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-575655ac", __vue__options__)
   } else {
     hotAPI.rerender("data-v-575655ac", __vue__options__)
   }
 })()}
-},{"vue":17,"vue-hot-reload-api":15}],13:[function(require,module,exports){
+},{"vue":17,"vue-hot-reload-api":15,"vueify/lib/insert-css":18}],13:[function(require,module,exports){
 
 },{}],14:[function(require,module,exports){
 // shim for using process in browser

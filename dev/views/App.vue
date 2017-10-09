@@ -63,9 +63,11 @@
 </script>
 
 <style scoped>
+  .container {
+    margin-top: 100px;
+  }
   .card {
     width: 100%;
     height: 70vh;
-    margin-top: 100px;
   }
 </style>
