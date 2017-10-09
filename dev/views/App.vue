@@ -8,9 +8,9 @@
       </div>
     </div>
 
-    <forest @loading="setLoading"></forest>
-    <ethereum-modal @loading="setLoading"></ethereum-modal>
-    <add-info-modal @loading="setLoading"></add-info-modal>
+    <forest :ethAPI="ethAPI" :ethKey="ethKey" @loading="setLoading"></forest>
+    <ethereum-modal @setEthKey="setEthKey" @loading="setLoading"></ethereum-modal>
+    <add-info-modal :ethAPI="ethAPI" :ethKey="ethKey" @loading="setLoading"></add-info-modal>
 
     <loader v-show="loading"></loader>
   </div>
@@ -24,6 +24,8 @@
   const Forest = require('./Forest.vue');
   const Loader = require('./Loader.vue');
 
+  const ethContract = require('../contract.json');
+  const EthAPI = require('../EthAPI');
 
   module.exports = {
     components: {
@@ -36,13 +38,17 @@
     },
     data() {
       return {
-        loading: false
+        loading: false,
+        ethKey: '',
+        ethAPI: new EthAPI(ethContract.adress, ethContract.contract)
       }
     },
     methods: {
       setLoading(v) {
-        console.log(v);
         this.loading = v;
+      },
+      setEthKey(key) {
+        this.ethKey = key;
       }
     },
     mounted() {

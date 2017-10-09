@@ -1,0 +1,48 @@
+{
+  "adress": "0x5067932eb5D6aDf36a0bc806410D775d38fc76DA",
+  "contract": [
+     {
+        "constant":false,
+        "inputs":[
+           {
+              "name":"hs",
+              "type":"string"
+           }
+        ],
+        "name":"add",
+        "outputs":[
+
+        ],
+        "payable":true,
+        "stateMutability":"payable",
+        "type":"function"
+     },
+     {
+        "constant":true,
+        "inputs":[
+           {
+              "name":"hs",
+              "type":"string"
+           }
+        ],
+        "name":"test",
+        "outputs":[
+           {
+              "name":"",
+              "type":"bool"
+           }
+        ],
+        "payable":false,
+        "stateMutability":"view",
+        "type":"function"
+     },
+     {
+        "inputs":[
+
+        ],
+        "payable":false,
+        "stateMutability":"nonpayable",
+        "type":"constructor"
+     }
+  ]
+}

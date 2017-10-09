@@ -17,10 +17,10 @@
   const options = require('../options');
 
   module.exports = {
+    props: ['ethAPI', 'ethKey'],
     data() {
       return {
-        data: {},
-        hash: ''
+        data: {}
       }
     },
     filters: {
@@ -34,16 +34,21 @@
     },
     methods: {
       loadInfo(hash) {
-        this.hash = hash;
-
-        this.$emit('loading', true);
-        this.$http.get(options.api + '/get_info', {params: {hash}}).then(response => {
-          this.data = response.body;
-          $('#forest').modal('open');
-          this.$emit('loading', false);
-        }, response => {
-          Materialize.toast('Не удалось загрузить информацию.', 3000);
-          this.$emit('loading', false);
+        this.ethAPI.check(hash, '0x9267549a2c01237b35515c9463dB994A8173B1d5').then((data) => {
+          if(data) {
+            this.$emit('loading', true);
+            this.$http.get(options.api + '/get_info', {params: {hash}}).then(response => {
+              this.data = response.body;
+              $('#forest').modal('open');
+              this.$emit('loading', false);
+            }, response => {
+              Materialize.toast('Не удалось загрузить информацию.', 3000);
+              this.$emit('loading', false);
+            });
+          } else {
+            Materialize.toast('Данные повреждены', 3000);
+            this.$emit('loading', false);
+          }
         });
       }
     },

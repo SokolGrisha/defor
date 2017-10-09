@@ -1,7 +1,7 @@
-module.exports = function EthAPI(to_address, str_abi) {
+module.exports = function EthAPI(to_address, abi) {
 	this.web3 = new Web3();
 	this.web3.setProvider(new this.web3.providers.HttpProvider("https://ropsten.infura.io"));
-	this.abi = JSON.parse(str_abi);
+	this.abi = abi;
 
 	this.to_address = to_address;
 	this.contract = new this.web3.eth.Contract(this.abi, this.to_address);
