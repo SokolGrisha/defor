@@ -26,11 +26,14 @@
     },
     methods: {
       enterKey() {
-        this.$emit('setEthKey', this.key);
+        this.$store.commit('setEthKey', this.key);
         $('#ethereum-key-modal').modal('close');
       }
     },
     mounted() {
+      $('.modal').modal({
+        endingTop: '18%'
+      });
       $('#ethereum-key-modal').modal('open');
     }
   }

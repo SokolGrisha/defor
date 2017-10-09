@@ -28,8 +28,6 @@
 </template>
 
 <script>
-  const options = require('../options.json');
-
   module.exports = {
     data() {
       return {
@@ -43,25 +41,8 @@
           return;
         }
 
-        this.$emit('loading', true);
-        $('#submitNewInfo').modal('close');
-        this.$http.post(options.api + '/add_info', {
-          x: this.x,
-          y: this.y,
-          date: +new Date,
-          image: this.base64
-        }).then(
-          response => {
-            Materialize.toast('Новый маркер создан!', 3000);
-            $('#add-info-modal').modal('close');
-            this.$emit('loading', false);
-          },
-          response => {
-            Materialize.toast('Не удалось создать новый маркер.', 3000);
-            this.$emit('loading', false);
-            $('#add-info-modal').modal('close');
-          }
-        );
+        $('#add-info-modal').modal('close');
+        this.$store.dispatch('addInfo', {base64: this.base64, y: this.y, x: this.x});
       },
       onFileChange(e) {
         var files = e.target.files || e.dataTransfer.files;
@@ -69,10 +50,10 @@
 
         var reader = new FileReader();
         reader.onload = (e) => {
-          this.$emit('loading', false);
+          this.$store.commit('loading', false);
           this.base64 = e.target.result;
         };
-        this.$emit('loading', true);
+        this.$store.commit('loading', true);
         reader.readAsDataURL(files[0]);
       }
     }

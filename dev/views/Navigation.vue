@@ -25,6 +25,9 @@
   .container {
     height: 100%;
   }
+  .brand-logo {
+    font-weight: 200;
+  }
   form {
     height: 64px;
   }

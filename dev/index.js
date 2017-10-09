@@ -1,11 +1,13 @@
 const Vue = require('vue');
-const VueResource = require('vue-resource');
+const Vuex = require('vuex');
 
 const App = require('./views/App.vue');
+const store = require('./store');
 
-Vue.use(VueResource);
+Vue.use(Vuex);
 
 new Vue({
   el: '#app',
+	store: new Vuex.Store(store),
   render: (h) => h(App),
 });

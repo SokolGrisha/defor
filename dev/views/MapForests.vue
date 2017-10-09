@@ -1,14 +1,13 @@
 <template>
-  <div id="map"></div>
+  <div id="map" :watch="markers"></div>
 </template>
 
 <script>
-  const options = require('../options');
-
   module.exports = {
-    data() {
-      return {
-        markers: []
+    computed: {
+      markers() {
+        this.addMarkers(this.$store.state.markers);
+        return this.$store.state.markers;
       }
     },
     methods: {
@@ -29,28 +28,21 @@
             marker.visible = true;
           }, count*300);
 
+          if(Object.keys(markers).length === 1) {
+            this.map.setCenter(marker.getPosition());
+          }
+
           marker.addListener('click', () => {
-            this.$parent.$emit('loadInfo', key);
+            this.$store.dispatch('loadInfo', key);
             marker.setAnimation(google.maps.Animation.BOUNCE);
             setTimeout(() => {
               marker.setAnimation(null);
             }, 1000);
           });
-          this.markers.push(marker);
         }
       },
       getLatLng(pos) {
         return {lat: pos.x, lng: pos.y};
-      },
-      loadMarkers() {
-        this.$emit('loading', true);
-        this.$http.get(options.api + '/get_points').then(response => {
-          this.addMarkers(response.body);
-          this.$emit('loading', false);
-        }, response => {
-          Materialize.toast('Не удалось загрузить маркеры.', 3000);
-          this.$emit('loading', false);
-        })
       }
     },
     mounted() {
@@ -67,7 +59,7 @@
           disableDefaultUI: true
         });
 
-        this.loadMarkers();
+        this.$store.dispatch('loadMarkers');
       }
     }
   }

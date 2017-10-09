@@ -6,6 +6,10 @@ module.exports = function EthAPI(to_address, abi) {
 	this.to_address = to_address;
 	this.contract = new this.web3.eth.Contract(this.abi, this.to_address);
 
+	this.getAdress = function(key) {
+		return keythereum.privateKeyToAddress(key);
+	}
+
 	this.check = function(arg, from_address) {
 		return this.contract.methods.test(arg).call({from : from_address});
 	}
@@ -14,7 +18,7 @@ module.exports = function EthAPI(to_address, abi) {
 		this.private_key = buffer.Buffer.from(props.key, 'hex');
 
 		this.web3.eth.getTransactionCount(props.fromAdress).then((current_nonce) => {
-			let payloadData = this.contract.methods.add(props.reqHash).encodeABI();
+			let payloadData = this.contract.methods.add(props.addHash).encodeABI();
 			let rawTx = {
 				nonce: this.web3.utils.toHex(current_nonce),
 				gasLimit: this.web3.utils.toHex(50000),
