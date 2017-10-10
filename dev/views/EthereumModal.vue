@@ -32,7 +32,7 @@
     },
     mounted() {
       $('.modal').modal({
-        endingTop: '10%'
+        endingTop: '5%'
       });
       $('#ethereum-key-modal').modal('open');
     }
