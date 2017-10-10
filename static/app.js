@@ -431,6 +431,11 @@ module.exports = {
         return template.split(specs[i]).join(item);
       }, template);
     }
+  },
+  mounted: function mounted() {
+    $('#forest').modal({
+      endingTop: '5%'
+    });
   }
 };
 })()

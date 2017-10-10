@@ -29,6 +29,11 @@
           return template.split(specs[i]).join(item);
         }, template);
       }
+    },
+    mounted() {
+      $('#forest').modal({
+        endingTop: '5%'
+      });
     }
   }
 </script>
