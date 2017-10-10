@@ -131,9 +131,11 @@ module.exports = {
     ethAPI: new EthAPI(ethContract.adress, ethContract.contract),
     ethKey: '',
     ethAdress: '',
-    rootApi: 'https://deforest.herokuapp.com',
+    rootApi: '',
     loading: false,
     markers: {},
+    newMarkers: {},
+    showMarker: null,
     info: {}
   },
   mutations: {
@@ -148,16 +150,44 @@ module.exports = {
       state.info = data;
     },
     newMarkers: function newMarkers(state, data) {
-      state.markers = data;
+      for (var key in data) {
+        state.markers[key] = data[key];
+      }
+      state.newMarkers = data;
+    },
+    showMarker: function showMarker(state, marker) {
+      state.showMarker = marker;
     }
   },
   actions: {
-    addInfo: function addInfo(_ref, _ref2) {
+    searchByCoords: function searchByCoords(_ref, req) {
       var state = _ref.state,
           commit = _ref.commit;
-      var x = _ref2.x,
-          y = _ref2.y,
-          base64 = _ref2.base64;
+
+      var result = req.match(/([0-9]+) ([0-9]+)/);
+      if (!result) {
+        Materialize.toast('\u041D\u0435\u043F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u0430\u044F \u0437\u0430\u043F\u0438\u0441\u044C \u043F\u043E\u0438\u0441\u043A\u0430.', 3000);
+        return;
+      }
+
+      var x = result[1];
+      var y = result[2];
+
+      for (var key in state.markers) {
+        var m = state.markers[key];
+        if (Math.round(m.x) == Math.round(x) && Math.round(m.y) == Math.round(y)) {
+          commit('showMarker', { x: m.x, y: m.y, hash: key });
+          return;
+        }
+      }
+      Materialize.toast('\u041F\u043E \u043A\u043E\u043E\u0440\u0434\u0438\u043D\u0430\u0442\u0430\u043C x: ' + x + ', y: ' + y + ' \u043C\u0430\u0440\u043A\u0435\u0440\u0430 \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D\u043E', 3000);
+    },
+    addInfo: function addInfo(_ref2, _ref3) {
+      var state = _ref2.state,
+          commit = _ref2.commit;
+      var x = _ref3.x,
+          y = _ref3.y,
+          base64 = _ref3.base64;
 
       var date = +new Date();
       var hash = sha256(base64 + x + y + date);
@@ -191,15 +221,14 @@ module.exports = {
         commit('loading', false);
       }
     },
-    loadInfo: function loadInfo(_ref3, hash) {
-      var commit = _ref3.commit,
-          state = _ref3.state;
+    loadInfo: function loadInfo(_ref4, hash) {
+      var commit = _ref4.commit,
+          state = _ref4.state;
 
       try {
         commit('loading', true);
         Materialize.toast('Проверяем хеш в блокчейне...', 3000);
         state.ethAPI.check(hash, state.ethAdress).then(function (data) {
-          console.log(state.ethAdress);
           if (data) {
             Materialize.toast('Хеш совпадает. Загружаем данные с сервера...', 3000);
             axios.get(state.rootApi + '/get_info', { params: { hash: hash } }).then(function (response) {
@@ -219,9 +248,9 @@ module.exports = {
         commit('loading', false);
       }
     },
-    loadMarkers: function loadMarkers(_ref4) {
-      var commit = _ref4.commit,
-          state = _ref4.state;
+    loadMarkers: function loadMarkers(_ref5) {
+      var commit = _ref5.commit,
+          state = _ref5.state;
 
       commit('loading', true);
       axios.get(state.rootApi + '/get_points').then(function (response) {
@@ -289,7 +318,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-290c3596", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-290c3596", __vue__options__)
+    hotAPI.reload("data-v-290c3596", __vue__options__)
   }
 })()}
 },{"vue":81,"vue-hot-reload-api":80,"vueify/lib/insert-css":82}],6:[function(require,module,exports){
@@ -334,7 +363,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-fc265d8e", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-fc265d8e", __vue__options__)
+    hotAPI.reload("data-v-fc265d8e", __vue__options__)
   }
 })()}
 },{"./AddInfoModal.vue":5,"./EthereumModal.vue":7,"./Forest.vue":8,"./Loader.vue":9,"./MapForests.vue":10,"./Navigation.vue":11,"vue":81,"vue-hot-reload-api":80,"vueify/lib/insert-css":82}],7:[function(require,module,exports){
@@ -379,7 +408,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-7da0e18e", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-7da0e18e", __vue__options__)
+    hotAPI.reload("data-v-7da0e18e", __vue__options__)
   }
 })()}
 },{"../store":4,"vue":81,"vue-hot-reload-api":80,"vueify/lib/insert-css":82}],8:[function(require,module,exports){
@@ -419,7 +448,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-42610996", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-42610996", __vue__options__)
+    hotAPI.reload("data-v-42610996", __vue__options__)
   }
 })()}
 },{"vue":81,"vue-hot-reload-api":80,"vueify/lib/insert-css":82}],9:[function(require,module,exports){
@@ -436,7 +465,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-65ade42b", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-65ade42b", __vue__options__)
+    hotAPI.reload("data-v-65ade42b", __vue__options__)
   }
 })()}
 },{"vue":81,"vue-hot-reload-api":80,"vueify/lib/insert-css":82}],10:[function(require,module,exports){
@@ -451,10 +480,29 @@ var _keys2 = _interopRequireDefault(_keys);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 module.exports = {
+  data: function data() {
+    return {
+      googleMarkers: {}
+    };
+  },
+
   computed: {
-    markers: function markers() {
-      this.addMarkers(this.$store.state.markers);
-      return this.$store.state.markers;
+    newMarkers: function newMarkers() {
+      this.addMarkers(this.$store.state.newMarkers);
+      return this.$store.state.newMarkers;
+    },
+    showMarker: function showMarker() {
+      var data = this.$store.state.showMarker;
+      if (!data) return;
+      var marker = this.googleMarkers[data.hash];
+      console.log(data.hash);
+      this.map.setCenter(marker.getPosition());
+      this.$store.dispatch('loadInfo', data.hash);
+      marker.setAnimation(google.maps.Animation.BOUNCE);
+      setTimeout(function () {
+        marker.setAnimation(null);
+      }, 1000);
+      return marker;
     }
   },
   methods: {
@@ -478,9 +526,7 @@ module.exports = {
           marker.visible = true;
         }, count * 300);
 
-        if ((0, _keys2.default)(markers).length === 1) {
-          _this.map.setCenter(marker.getPosition());
-        }
+        if ((0, _keys2.default)(markers).length === 1) _this.map.setCenter(marker.getPosition());
 
         marker.addListener('click', function () {
           _this.$store.dispatch('loadInfo', key);
@@ -489,6 +535,7 @@ module.exports = {
             marker.setAnimation(null);
           }, 1000);
         });
+        _this.googleMarkers[key] = marker;
       };
 
       for (var key in markers) {
@@ -499,7 +546,7 @@ module.exports = {
       return { lat: pos.x, lng: pos.y };
     }
   },
-  mounted: function mounted() {
+  created: function created() {
     var _this2 = this;
 
     window.initMap = function () {
@@ -523,7 +570,7 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"map","watch":_vm.markers}})}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"map","watch":_vm.newMarkers,"watch2":_vm.showMarker}})}
 __vue__options__.staticRenderFns = []
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -533,15 +580,33 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-6a7c8392", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-6a7c8392", __vue__options__)
+    hotAPI.reload("data-v-6a7c8392", __vue__options__)
   }
 })()}
 },{"babel-runtime/core-js/object/keys":37,"vue":81,"vue-hot-reload-api":80,"vueify/lib/insert-css":82}],11:[function(require,module,exports){
 var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("nav[data-v-575655ac] {\n  position: fixed;\n  top: 0;\n  left: 0;\n  z-index: 10;\n}\n.container[data-v-575655ac] {\n  height: 100%;\n}\n.brand-logo[data-v-575655ac] {\n  font-weight: 200;\n}\nform[data-v-575655ac] {\n  height: 64px;\n}\nlabel i[data-v-575655ac] {\n  margin-top: -10px;\n}")
+;(function(){
+'use strict';
+
+module.exports = {
+  data: function data() {
+    return {
+      search: ''
+    };
+  },
+
+  methods: {
+    searchCoords: function searchCoords() {
+      this.$store.dispatch('searchByCoords', this.search);
+    }
+  }
+};
+})()
+if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _vm._m(0)}
-__vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('nav',[_c('div',{staticClass:"nav-wrapper green darken-2 "},[_c('div',{staticClass:"container"},[_c('div',{staticClass:"row"},[_c('div',{staticClass:"col s8"},[_c('a',{staticClass:"brand-logo"},[_vm._v("DeForest")])]),_vm._v(" "),_c('div',{staticClass:"col s4 hide-on-small-only"},[_c('form',[_c('div',{staticClass:"input-field"},[_c('input',{attrs:{"id":"search","type":"search","placeholder":"Введите x и y координату для поиска"}}),_vm._v(" "),_c('label',{staticClass:"label-icon",attrs:{"for":"search"}},[_c('i',{staticClass:"material-icons"},[_vm._v("search")])]),_vm._v(" "),_c('i',{staticClass:"material-icons"},[_vm._v("close")])])])])])])])])}]
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('nav',[_c('div',{staticClass:"nav-wrapper green darken-2 "},[_c('div',{staticClass:"container"},[_c('div',{staticClass:"row"},[_vm._m(0),_vm._v(" "),_c('div',{staticClass:"col s4 hide-on-small-only"},[_c('form',{on:{"submit":function($event){$event.preventDefault();_vm.searchCoords($event)}}},[_c('div',{staticClass:"input-field"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.search),expression:"search"}],attrs:{"id":"search","type":"search","autocomplete":"off","placeholder":"Введите x и y координату для поиска"},domProps:{"value":(_vm.search)},on:{"input":function($event){if($event.target.composing){ return; }_vm.search=$event.target.value}}}),_vm._v(" "),_vm._m(1),_vm._v(" "),_c('i',{staticClass:"material-icons"},[_vm._v("close")])])])])])])])])}
+__vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"col s8"},[_c('a',{staticClass:"brand-logo"},[_vm._v("DeForest")])])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('label',{staticClass:"label-icon",attrs:{"for":"search"}},[_c('i',{staticClass:"material-icons"},[_vm._v("search")])])}]
 __vue__options__._scopeId = "data-v-575655ac"
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -551,7 +616,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-575655ac", __vue__options__)
   } else {
-    hotAPI.rerender("data-v-575655ac", __vue__options__)
+    hotAPI.reload("data-v-575655ac", __vue__options__)
   }
 })()}
 },{"vue":81,"vue-hot-reload-api":80,"vueify/lib/insert-css":82}],12:[function(require,module,exports){

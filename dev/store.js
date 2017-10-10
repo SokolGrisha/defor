@@ -8,9 +8,11 @@ module.exports = {
     ethAPI: new EthAPI(ethContract.adress, ethContract.contract),
     ethKey: '',
     ethAdress: '',
-    rootApi: 'https://deforest.herokuapp.com',
+    rootApi: '',
     loading: false,
     markers: {},
+    newMarkers: {},
+    showMarker: null,
     info: {}
   },
   mutations: {
@@ -25,10 +27,35 @@ module.exports = {
       state.info = data;
     },
     newMarkers(state, data) {
-      state.markers = data;
+      for(let key in data) {
+        state.markers[key] = data[key];
+      }
+      state.newMarkers = data;
+    },
+    showMarker(state, marker) {
+      state.showMarker = marker;
     }
   },
   actions: {
+    searchByCoords({state, commit}, req) {
+      let result = req.match(/([0-9]+) ([0-9]+)/);
+      if(!result) {
+        Materialize.toast(`Неправильная запись поиска.`, 3000);
+        return;
+      }
+
+      let x = result[1];
+      let y = result[2];
+
+      for(let key in state.markers) {
+        let m = state.markers[key];
+        if(Math.round(m.x) == Math.round(x) && Math.round(m.y) == Math.round(y)) {
+          commit('showMarker', {x: m.x, y: m.y, hash: key});
+          return;
+        }
+      }
+      Materialize.toast(`По координатам x: ${x}, y: ${y} маркера не найдено`, 3000);
+    },
     addInfo({state, commit}, {x, y, base64}) {
       let date = +new Date;
       let hash = sha256(base64+x+y+date);
@@ -70,7 +97,6 @@ module.exports = {
         commit('loading', true);
         Materialize.toast('Проверяем хеш в блокчейне...', 3000);
         state.ethAPI.check(hash, state.ethAdress).then((data) => {
-          console.log(state.ethAdress);
           if(data) {
             Materialize.toast('Хеш совпадает. Загружаем данные с сервера...', 3000);
             axios.get(state.rootApi + '/get_info', {params: {hash}}).then(response => {

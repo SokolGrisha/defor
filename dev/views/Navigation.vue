@@ -7,9 +7,9 @@
             <a class="brand-logo">DeForest</a>
           </div>
           <div class="col s4 hide-on-small-only">
-            <form>
+            <form @submit.prevent="searchCoords">
               <div class="input-field">
-                <input id="search" type="search" placeholder="Введите x и y координату для поиска">
+                <input id="search" type="search" v-model="search" autocomplete="off" placeholder="Введите x и y координату для поиска">
                 <label class="label-icon" for="search"><i class="material-icons">search</i></label>
                 <i class="material-icons">close</i>
               </div>
@@ -20,6 +20,21 @@
     </div>
   </nav>
 </template>
+
+<script>
+  module.exports = {
+    data() {
+      return {
+        search: ''
+      }
+    },
+    methods: {
+      searchCoords() {
+        this.$store.dispatch('searchByCoords', this.search);
+      }
+    }
+  }
+</script>
 
 <style scoped>
   nav {

@@ -1,13 +1,31 @@
 <template>
-  <div id="map" :watch="markers"></div>
+  <div id="map" :watch="newMarkers" :watch2="showMarker"></div>
 </template>
 
 <script>
   module.exports = {
+    data() {
+      return {
+        googleMarkers: {}
+      }
+    },
     computed: {
-      markers() {
-        this.addMarkers(this.$store.state.markers);
-        return this.$store.state.markers;
+      newMarkers() {
+        this.addMarkers(this.$store.state.newMarkers);
+        return this.$store.state.newMarkers;
+      },
+      showMarker() {
+        let data = this.$store.state.showMarker;
+        if(!data) return;
+        let marker = this.googleMarkers[data.hash];
+        console.log(data.hash);
+        this.map.setCenter(marker.getPosition());
+        this.$store.dispatch('loadInfo', data.hash);
+        marker.setAnimation(google.maps.Animation.BOUNCE);
+        setTimeout(() => {
+          marker.setAnimation(null);
+        }, 1000);
+        return marker;
       }
     },
     methods: {
@@ -28,9 +46,9 @@
             marker.visible = true;
           }, count*300);
 
-          if(Object.keys(markers).length === 1) {
+          if(Object.keys(markers).length === 1)
             this.map.setCenter(marker.getPosition());
-          }
+
 
           marker.addListener('click', () => {
             this.$store.dispatch('loadInfo', key);
@@ -39,13 +57,14 @@
               marker.setAnimation(null);
             }, 1000);
           });
+          this.googleMarkers[key] = marker;
         }
       },
       getLatLng(pos) {
         return {lat: pos.x, lng: pos.y};
       }
     },
-    mounted() {
+    created() {
       window.initMap = () => {
         this.map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: 58, lng: 95},
