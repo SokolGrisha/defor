@@ -388,7 +388,7 @@ module.exports = {
   },
   mounted: function mounted() {
     $('.modal').modal({
-      endingTop: '18%'
+      endingTop: '10%'
     });
     $('#ethereum-key-modal').modal('open');
   }
@@ -431,11 +431,6 @@ module.exports = {
         return template.split(specs[i]).join(item);
       }, template);
     }
-  },
-  mounted: function mounted() {
-    $('#forest').modal({
-      endingTop: '5%'
-    });
   }
 };
 })()
