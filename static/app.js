@@ -129,7 +129,7 @@ module.exports = {
     ethAPI: new EthAPI(ethContract.adress, ethContract.contract),
     ethKey: '',
     ethAdress: '',
-    rootApi: '',
+    rootApi: 'https://deforest.herokuapp.com',
     loading: false,
     markers: {},
     info: {}
@@ -163,45 +163,56 @@ module.exports = {
       commit('loading', true);
       Materialize.toast('Создается новая запись в блокчейне', 3000);
 
-      state.ethAPI.add({
-        addHash: hash,
-        key: state.ethKey,
-        fromAdress: state.ethAdress,
+      try {
+        state.ethAPI.add({
+          addHash: hash,
+          key: state.ethKey,
+          fromAdress: state.ethAdress,
 
-        resolve: function resolve(data) {
-          axios.post(state.rootApi + '/add_info', { x: x, y: y, image: base64, date: date }).then(function (response) {
-            Materialize.toast('Новый маркер создан!', 3000);
-            commit('loading', false);
-            commit('newMarkers', _defineProperty({}, hash, { x: +x, y: +y }));
-          }, function (response) {
-            Materialize.toast('Не удалось создать новый маркер.', 3000);
-            commit('loading', false);
-          });
-        },
-        reject: function reject(err) {
-          Materialize.toast('Ошибка. Не получилось создать запись.', 3000);
-        }
-      });
+          resolve: function resolve(data) {
+            axios.post(state.rootApi + '/add_info', { x: x, y: y, image: base64, date: date }).then(function (response) {
+              Materialize.toast('Новый маркер создан!', 3000);
+              Materialize.toast('Подождите, пока хеш будет замайнен.', 3000);
+              commit('loading', false);
+              commit('newMarkers', _defineProperty({}, hash, { x: +x, y: +y }));
+            }, function (response) {
+              Materialize.toast('Не удалось создать новый маркер.', 3000);
+              commit('loading', false);
+            });
+          },
+          reject: function reject(err) {
+            Materialize.toast('Ошибка. Не получилось создать запись.', 3000);
+          }
+        });
+      } catch (e) {
+        Materialize.toast('Ошибка. Скорее всего ключ указан не верно.', 3000);
+        commit('loading', false);
+      }
     },
     loadInfo: function loadInfo(_ref3, hash) {
       var commit = _ref3.commit,
           state = _ref3.state;
 
-      state.ethAPI.check(hash, state.ethAdress).then(function (data) {
-        if (data) {
-          commit('loading', true);
-          axios.get(state.rootApi + '/get_info', { params: { hash: hash } }).then(function (response) {
-            commit('setInfo', response.data);
+      try {
+        state.ethAPI.check(hash, state.ethAdress).then(function (data) {
+          if (data) {
+            commit('loading', true);
+            axios.get(state.rootApi + '/get_info', { params: { hash: hash } }).then(function (response) {
+              commit('setInfo', response.data);
+              commit('loading', false);
+            }, function (response) {
+              Materialize.toast('Не удалось загрузить информацию.', 3000);
+              commit('loading', false);
+            });
+          } else {
+            Materialize.toast('Данные повреждены', 3000);
             commit('loading', false);
-          }, function (response) {
-            Materialize.toast('Не удалось загрузить информацию.', 3000);
-            commit('loading', false);
-          });
-        } else {
-          Materialize.toast('Данные повреждены', 3000);
-          commit('loading', false);
-        }
-      });
+          }
+        });
+      } catch (e) {
+        Materialize.toast('Ошибка. Скорее всего ключ указан не верно.', 3000);
+        commit('loading', false);
+      }
     },
     loadMarkers: function loadMarkers(_ref4) {
       var commit = _ref4.commit,
@@ -277,7 +288,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   }
 })()}
 },{"vue":78,"vue-hot-reload-api":77,"vueify/lib/insert-css":79}],6:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".container[data-v-fc265d8e] {\n  margin-top: 100px;\n}\n.card[data-v-fc265d8e] {\n  width: 100%;\n  height: 70vh;\n}")
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("#app[data-v-fc265d8e] {\n  min-height: 100vh;\n}\n.card[data-v-fc265d8e] {\n  width: 100%;\n  height: 70vh;\n}")
 ;(function(){
 'use strict';
 
@@ -367,7 +378,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   }
 })()}
 },{"../store":4,"vue":78,"vue-hot-reload-api":77,"vueify/lib/insert-css":79}],8:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".modal[data-v-42610996] {\n  background: none;\n  box-shadow: none;\n  overflow: hidden;\n}\n.image[data-v-42610996] {\n  background-position: center;\n  background-size: cover;\n  width: 100%;\n  height: 500px;\n}\n\n@media (max-width: 480px) {\n  .image[data-v-42610996] {\n    height: 250px;\n  }\n}")
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".modal[data-v-42610996] {\n  background: none;\n  box-shadow: none;\n  overflow: hidden;\n}\n.image[data-v-42610996] {\n  background-position: center;\n  background-size: cover;\n  width: 100%;\n  height: 500px;\n}\n\n@media (max-width: 768px) {\n  .image[data-v-42610996] {\n    height: 260px;\n  }\n}\n@media (max-width: 992px) {\n  .image[data-v-42610996] {\n    height: 450px;\n  }\n}")
 ;(function(){
 'use strict';
 
@@ -424,7 +435,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   }
 })()}
 },{"vue":78,"vue-hot-reload-api":77,"vueify/lib/insert-css":79}],10:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("#map {\n  height: 100%;\n}\n@media (max-width: 480px) {\n  #map {\n    margin-top: -50px;\n  }\n}")
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("#map {\n  height: 100%;\n  margin-top: 50px;\n}")
 ;(function(){
 'use strict';
 

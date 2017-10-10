@@ -8,7 +8,7 @@ module.exports = {
     ethAPI: new EthAPI(ethContract.adress, ethContract.contract),
     ethKey: '',
     ethAdress: '',
-    rootApi: '',
+    rootApi: 'https://deforest.herokuapp.com',
     loading: false,
     markers: {},
     info: {}
@@ -36,45 +36,56 @@ module.exports = {
       commit('loading', true);
       Materialize.toast('Создается новая запись в блокчейне', 3000);
 
-      state.ethAPI.add({
-        addHash: hash,
-        key: state.ethKey,
-        fromAdress: state.ethAdress,
+      try {
+        state.ethAPI.add({
+          addHash: hash,
+          key: state.ethKey,
+          fromAdress: state.ethAdress,
 
-        resolve: (data) => {
-          axios.post(state.rootApi + '/add_info', {x, y, image: base64, date}).then(
-            response => {
-              Materialize.toast('Новый маркер создан!', 3000);
-              commit('loading', false);
-              commit('newMarkers', {[hash]: {x: +x, y: +y}});
-            },
-            response => {
-              Materialize.toast('Не удалось создать новый маркер.', 3000);
-              commit('loading', false);
-            }
-          );
-        },
-        reject: (err) => {
-          Materialize.toast('Ошибка. Не получилось создать запись.', 3000);
-        }
-      });
+          resolve: (data) => {
+            axios.post(state.rootApi + '/add_info', {x, y, image: base64, date}).then(
+              response => {
+                Materialize.toast('Новый маркер создан!', 3000);
+                Materialize.toast('Подождите, пока хеш будет замайнен.', 3000);
+                commit('loading', false);
+                commit('newMarkers', {[hash]: {x: +x, y: +y}});
+              },
+              response => {
+                Materialize.toast('Не удалось создать новый маркер.', 3000);
+                commit('loading', false);
+              }
+            );
+          },
+          reject: (err) => {
+            Materialize.toast('Ошибка. Не получилось создать запись.', 3000);
+          }
+        });
+      } catch(e) {
+        Materialize.toast('Ошибка. Скорее всего ключ указан не верно.', 3000);
+        commit('loading', false);
+      }
     },
     loadInfo({commit, state}, hash) {
-      state.ethAPI.check(hash, state.ethAdress).then((data) => {
-        if(data) {
-          commit('loading', true);
-          axios.get(state.rootApi + '/get_info', {params: {hash}}).then(response => {
-            commit('setInfo', response.data);
+      try {
+        state.ethAPI.check(hash, state.ethAdress).then((data) => {
+          if(data) {
+            commit('loading', true);
+            axios.get(state.rootApi + '/get_info', {params: {hash}}).then(response => {
+              commit('setInfo', response.data);
+              commit('loading', false);
+            }, response => {
+              Materialize.toast('Не удалось загрузить информацию.', 3000);
+              commit('loading', false);
+            });
+          } else {
+            Materialize.toast('Данные повреждены', 3000);
             commit('loading', false);
-          }, response => {
-            Materialize.toast('Не удалось загрузить информацию.', 3000);
-            commit('loading', false);
-          });
-        } else {
-          Materialize.toast('Данные повреждены', 3000);
-          commit('loading', false);
-        }
-      });
+          }
+        });
+      } catch(e) {
+        Materialize.toast('Ошибка. Скорее всего ключ указан не верно.', 3000);
+        commit('loading', false);
+      }
     },
     loadMarkers({commit, state}) {
       commit('loading', true);

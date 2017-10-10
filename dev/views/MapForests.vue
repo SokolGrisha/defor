@@ -68,10 +68,6 @@
 <style lang="css">
   #map {
     height: 100%;
-  }
-  @media (max-width: 480px) {
-    #map {
-      margin-top: -50px;
-    }
+    margin-top: 50px;
   }
 </style>

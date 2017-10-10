@@ -42,8 +42,8 @@
 </script>
 
 <style scoped>
-  .container {
-    margin-top: 100px;
+  #app {
+    min-height: 100vh;
   }
   .card {
     width: 100%;

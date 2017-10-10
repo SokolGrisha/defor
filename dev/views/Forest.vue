@@ -46,9 +46,14 @@
     height: 500px;
   }
 
-  @media (max-width: 480px) {
+  @media (max-width: 768px) {
     .image {
-      height: 250px;
+      height: 260px;
+    }
+  }
+  @media (max-width: 992px) {
+    .image {
+      height: 450px;
     }
   }
 </style>
