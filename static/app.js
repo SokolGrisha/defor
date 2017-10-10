@@ -131,7 +131,7 @@ module.exports = {
     ethAPI: new EthAPI(ethContract.adress, ethContract.contract),
     ethKey: '',
     ethAdress: '',
-    rootApi: '',
+    rootApi: 'https://deforest.herokuapp.com',
     loading: false,
     markers: {},
     info: {}
@@ -196,9 +196,12 @@ module.exports = {
           state = _ref3.state;
 
       try {
+        commit('loading', true);
+        Materialize.toast('Проверяем хеш в блокчейне...', 3000);
         state.ethAPI.check(hash, state.ethAdress).then(function (data) {
+          console.log(state.ethAdress);
           if (data) {
-            commit('loading', true);
+            Materialize.toast('Хеш совпадает. Загружаем данные с сервера...', 3000);
             axios.get(state.rootApi + '/get_info', { params: { hash: hash } }).then(function (response) {
               commit('setInfo', response.data);
               commit('loading', false);
@@ -286,11 +289,11 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-290c3596", __vue__options__)
   } else {
-    hotAPI.reload("data-v-290c3596", __vue__options__)
+    hotAPI.rerender("data-v-290c3596", __vue__options__)
   }
 })()}
 },{"vue":81,"vue-hot-reload-api":80,"vueify/lib/insert-css":82}],6:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("#app[data-v-fc265d8e] {\n  min-height: 100vh;\n}\n.card[data-v-fc265d8e] {\n  width: 100%;\n  height: 70vh;\n}")
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("#app[data-v-fc265d8e] {\n  min-height: 100vh;\n  overflow: hidden;\n}\n.container[data-v-fc265d8e] {\n  margin-top: 140px;\n}\n.card[data-v-fc265d8e] {\n  width: 100%;\n  height: 70vh;\n}")
 ;(function(){
 'use strict';
 
@@ -331,7 +334,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-fc265d8e", __vue__options__)
   } else {
-    hotAPI.reload("data-v-fc265d8e", __vue__options__)
+    hotAPI.rerender("data-v-fc265d8e", __vue__options__)
   }
 })()}
 },{"./AddInfoModal.vue":5,"./EthereumModal.vue":7,"./Forest.vue":8,"./Loader.vue":9,"./MapForests.vue":10,"./Navigation.vue":11,"vue":81,"vue-hot-reload-api":80,"vueify/lib/insert-css":82}],7:[function(require,module,exports){
@@ -376,11 +379,11 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-7da0e18e", __vue__options__)
   } else {
-    hotAPI.reload("data-v-7da0e18e", __vue__options__)
+    hotAPI.rerender("data-v-7da0e18e", __vue__options__)
   }
 })()}
 },{"../store":4,"vue":81,"vue-hot-reload-api":80,"vueify/lib/insert-css":82}],8:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".modal[data-v-42610996] {\n  background: none;\n  box-shadow: none;\n  overflow: hidden;\n}\n.image[data-v-42610996] {\n  background-position: center;\n  background-size: cover;\n  width: 100%;\n  height: 500px;\n}\n\n@media (max-width: 768px) {\n  .image[data-v-42610996] {\n    height: 260px;\n  }\n}\n@media (max-width: 992px) {\n  .image[data-v-42610996] {\n    height: 450px;\n  }\n}")
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".modal[data-v-42610996] {\n  background: none;\n  box-shadow: none;\n  overflow-y: initial;\n}\n.card-content[data-v-42610996] {\n  position: absolute;\n  bottom: 0px;\n  background: #fff;\n  width: 100%;\n}\n@media (max-width: 1280px) {\n  .card-content[data-v-42610996] {\n    bottom: -50px;\n  }\n}\n@media (max-width: 720px) {\n  .card-content[data-v-42610996] {\n    bottom: -100px;\n  }\n}")
 ;(function(){
 'use strict';
 
@@ -405,7 +408,7 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"modal",attrs:{"id":"forest"}},[_c('div',{staticClass:"card"},[_c('div',{staticClass:"card-image"},[_c('div',{staticClass:"image",style:({ backgroundImage: 'url(' + _vm.info.image + ')' })})]),_vm._v(" "),_c('div',{staticClass:"card-content"},[_c('p',{staticClass:"flow-text"},[_vm._v("Дата: "+_vm._s(_vm._f("formatDate")(_vm.info.date,'MM/DD/YYYY, HH:mm:ss')))]),_vm._v(" "),_c('p',{staticClass:"flow-text"},[_vm._v("Долгота: "+_vm._s(_vm.info.x)+"°")]),_vm._v(" "),_c('p',{staticClass:"flow-text"},[_vm._v("Широта: "+_vm._s(_vm.info.y)+"°")])])])])}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"modal",attrs:{"id":"forest"}},[_c('div',{staticClass:"card modal-fixed-footer"},[_c('div',{staticClass:"card-image"},[_c('img',{staticClass:"responsive-img materialboxed",attrs:{"src":_vm.info.image}})]),_vm._v(" "),_c('div',{staticClass:"card-content"},[_c('p',{staticClass:"flow-text"},[_vm._v("Дата: "+_vm._s(_vm._f("formatDate")(_vm.info.date,'MM/DD/YYYY, HH:mm:ss')))]),_vm._v(" "),_c('p',{staticClass:"flow-text"},[_vm._v("Долгота: "+_vm._s(_vm.info.x)+"°")]),_vm._v(" "),_c('p',{staticClass:"flow-text"},[_vm._v("Широта: "+_vm._s(_vm.info.y)+"°")])])])])}
 __vue__options__.staticRenderFns = []
 __vue__options__._scopeId = "data-v-42610996"
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
@@ -416,7 +419,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-42610996", __vue__options__)
   } else {
-    hotAPI.reload("data-v-42610996", __vue__options__)
+    hotAPI.rerender("data-v-42610996", __vue__options__)
   }
 })()}
 },{"vue":81,"vue-hot-reload-api":80,"vueify/lib/insert-css":82}],9:[function(require,module,exports){
@@ -433,11 +436,11 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-65ade42b", __vue__options__)
   } else {
-    hotAPI.reload("data-v-65ade42b", __vue__options__)
+    hotAPI.rerender("data-v-65ade42b", __vue__options__)
   }
 })()}
 },{"vue":81,"vue-hot-reload-api":80,"vueify/lib/insert-css":82}],10:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("#map {\n  height: 100%;\n  margin-top: 50px;\n}")
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("#map {\n  height: 100%;\n}")
 ;(function(){
 'use strict';
 
@@ -530,15 +533,15 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-6a7c8392", __vue__options__)
   } else {
-    hotAPI.reload("data-v-6a7c8392", __vue__options__)
+    hotAPI.rerender("data-v-6a7c8392", __vue__options__)
   }
 })()}
 },{"babel-runtime/core-js/object/keys":37,"vue":81,"vue-hot-reload-api":80,"vueify/lib/insert-css":82}],11:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".container[data-v-575655ac] {\n  height: 100%;\n}\n.brand-logo[data-v-575655ac] {\n  font-weight: 200;\n}\nform[data-v-575655ac] {\n  height: 64px;\n}\nlabel i[data-v-575655ac] {\n  margin-top: -10px;\n}")
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("nav[data-v-575655ac] {\n  position: fixed;\n  top: 0;\n  left: 0;\n  z-index: 10;\n}\n.container[data-v-575655ac] {\n  height: 100%;\n}\n.brand-logo[data-v-575655ac] {\n  font-weight: 200;\n}\nform[data-v-575655ac] {\n  height: 64px;\n}\nlabel i[data-v-575655ac] {\n  margin-top: -10px;\n}")
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
 __vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _vm._m(0)}
-__vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('nav',[_c('div',{staticClass:"nav-wrapper green darken-2"},[_c('div',{staticClass:"container"},[_c('div',{staticClass:"row"},[_c('div',{staticClass:"col s8"},[_c('a',{staticClass:"brand-logo"},[_vm._v("DeForest")])]),_vm._v(" "),_c('div',{staticClass:"col s4"},[_c('form',[_c('div',{staticClass:"input-field"},[_c('input',{attrs:{"id":"search","type":"search","placeholder":"Введите x и y координату для поиска"}}),_vm._v(" "),_c('label',{staticClass:"label-icon",attrs:{"for":"search"}},[_c('i',{staticClass:"material-icons"},[_vm._v("search")])]),_vm._v(" "),_c('i',{staticClass:"material-icons"},[_vm._v("close")])])])])])])])])}]
+__vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('nav',[_c('div',{staticClass:"nav-wrapper green darken-2 "},[_c('div',{staticClass:"container"},[_c('div',{staticClass:"row"},[_c('div',{staticClass:"col s8"},[_c('a',{staticClass:"brand-logo"},[_vm._v("DeForest")])]),_vm._v(" "),_c('div',{staticClass:"col s4 hide-on-small-only"},[_c('form',[_c('div',{staticClass:"input-field"},[_c('input',{attrs:{"id":"search","type":"search","placeholder":"Введите x и y координату для поиска"}}),_vm._v(" "),_c('label',{staticClass:"label-icon",attrs:{"for":"search"}},[_c('i',{staticClass:"material-icons"},[_vm._v("search")])]),_vm._v(" "),_c('i',{staticClass:"material-icons"},[_vm._v("close")])])])])])])])])}]
 __vue__options__._scopeId = "data-v-575655ac"
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -548,7 +551,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-575655ac", __vue__options__)
   } else {
-    hotAPI.reload("data-v-575655ac", __vue__options__)
+    hotAPI.rerender("data-v-575655ac", __vue__options__)
   }
 })()}
 },{"vue":81,"vue-hot-reload-api":80,"vueify/lib/insert-css":82}],12:[function(require,module,exports){

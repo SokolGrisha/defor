@@ -44,6 +44,10 @@
 <style scoped>
   #app {
     min-height: 100vh;
+    overflow: hidden;
+  }
+  .container {
+    margin-top: 140px;
   }
   .card {
     width: 100%;

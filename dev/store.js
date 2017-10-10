@@ -8,7 +8,7 @@ module.exports = {
     ethAPI: new EthAPI(ethContract.adress, ethContract.contract),
     ethKey: '',
     ethAdress: '',
-    rootApi: '',
+    rootApi: 'https://deforest.herokuapp.com',
     loading: false,
     markers: {},
     info: {}
@@ -67,9 +67,12 @@ module.exports = {
     },
     loadInfo({commit, state}, hash) {
       try {
+        commit('loading', true);
+        Materialize.toast('Проверяем хеш в блокчейне...', 3000);
         state.ethAPI.check(hash, state.ethAdress).then((data) => {
+          console.log(state.ethAdress);
           if(data) {
-            commit('loading', true);
+            Materialize.toast('Хеш совпадает. Загружаем данные с сервера...', 3000);
             axios.get(state.rootApi + '/get_info', {params: {hash}}).then(response => {
               commit('setInfo', response.data);
               commit('loading', false);

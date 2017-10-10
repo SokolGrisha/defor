@@ -68,6 +68,5 @@
 <style lang="css">
   #map {
     height: 100%;
-    margin-top: 50px;
   }
 </style>

@@ -13,7 +13,7 @@ module.exports = function EthAPI(to_address, abi) {
 	}
 
 	this.check = function(arg, from_address) {
-		return this.contract.methods.test(arg).call({from : from_address});
+		return this.contract.methods.test(arg).call({from: from_address});
 	}
 
 	this.add = function(props) {
