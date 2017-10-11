@@ -21,7 +21,7 @@ def get_points():
 		info = database.get("hash:%s" % point)
 
 		if info is  not None:
-			result[point] = {"x":info["x"], "y":info["y"]}
+			result[point] = {"x":info["x"], "y":info["y"], info.get("is_valid", True)}
 
 	return json.dumps(result), 200
 
@@ -42,6 +42,7 @@ def add_info():
 	base64_image = data.get("image")
 	x, y =  data.get("x"), data.get("y")
 	date = data.get("date")
+	is_valid = data.get("is_valid", True)
 	points = database.get("points", default=[])
 
 	h = hash_string(base64_image+str(x)+str(y)+str(date))
@@ -50,6 +51,7 @@ def add_info():
 		"image": base64_image,
 		"x": float(x),
 		"y": float(y),
+		"is_valid": is_valid,
 		"date": int(date)
 	}
 
