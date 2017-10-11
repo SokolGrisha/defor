@@ -1,8 +1,8 @@
 <template>
   <div id="forest" class="modal">
-    <div class="card">
+    <div class="card modal-fixed-footer">
       <div class="card-image">
-        <div class="image" :style="{ backgroundImage: 'url(' + info.image + ')' }"></div>
+        <img class="responsive-img materialboxed" :src="info.image"></img>
       </div>
       <div class="card-content">
         <p class="flow-text">Дата: {{info.date | formatDate('MM/DD/YYYY, HH:mm:ss')}}</p>
@@ -37,18 +37,22 @@
   .modal {
     background: none;
     box-shadow: none;
-    overflow: hidden;
+    overflow-y: initial;
   }
-  .image {
-    background-position: center;
-    background-size: cover;
+  .card-content {
+    position: absolute;
+    bottom: 0px;
+    background: #fff;
     width: 100%;
-    height: 500px;
   }
-
-  @media (max-width: 480px) {
-    .image {
-      height: 250px;
+  @media (max-width: 1280px) {
+    .card-content {
+      bottom: -50px;
+    }
+  }
+  @media (max-width: 720px) {
+    .card-content {
+      bottom: -100px;
     }
   }
 </style>

@@ -1,3 +1,5 @@
+var Buffer = require('buffer').Buffer;
+
 module.exports = function EthAPI(to_address, abi) {
 	this.web3 = new Web3();
 	this.web3.setProvider(new this.web3.providers.HttpProvider("https://ropsten.infura.io"));
@@ -11,11 +13,11 @@ module.exports = function EthAPI(to_address, abi) {
 	}
 
 	this.check = function(arg, from_address) {
-		return this.contract.methods.test(arg).call({from : from_address});
+		return this.contract.methods.test(arg).call({from: from_address});
 	}
 
 	this.add = function(props) {
-		this.private_key = buffer.Buffer.from(props.key, 'hex');
+		this.private_key = Buffer.from(props.key, 'hex');
 
 		this.web3.eth.getTransactionCount(props.fromAdress).then((current_nonce) => {
 			let payloadData = this.contract.methods.add(props.addHash).encodeABI();
