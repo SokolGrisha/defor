@@ -48,8 +48,8 @@ def add_info():
 
 	info = {
 		"image": base64_image,
-		"x": x,
-		"y": y,
+		"x": float(x),
+		"y": float(y),
 		"date": int(date)
 	}
 
