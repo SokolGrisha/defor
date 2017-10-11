@@ -131,7 +131,7 @@ module.exports = {
     ethAPI: new EthAPI(ethContract.adress, ethContract.contract),
     ethKey: '',
     ethAdress: '',
-    rootApi: '',
+    rootApi: 'https://deforest.herokuapp.com',
     loading: false,
     markers: {},
     newMarkers: {},
@@ -328,7 +328,7 @@ if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
 __vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('div',{staticClass:"modal",attrs:{"id":"add-info-modal"}},[_c('div',{staticClass:"modal-content"},[_c('h4',[_vm._v("Новый маркер")]),_vm._v(" "),_c('br'),_vm._v(" "),_c('div',{staticClass:"row"},[_c('form',{on:{"submit":function($event){$event.preventDefault();_vm.submitNewInfo($event)}}},[_c('div',{staticClass:"file-field input-field"},[_c('div',{staticClass:"btn green"},[_c('span',[_vm._v("Фотография")]),_vm._v(" "),_c('input',{attrs:{"type":"file","required":""},on:{"change":_vm.onFileChange}})]),_vm._v(" "),_vm._m(0)]),_vm._v(" "),_c('div',{staticClass:"input-field сol s12"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.x),expression:"x"}],attrs:{"id":"x-coord","required":"","autocomplete":"off","placeholder":"Введите долготу"},domProps:{"value":(_vm.x)},on:{"input":function($event){if($event.target.composing){ return; }_vm.x=$event.target.value}}})]),_vm._v(" "),_c('div',{staticClass:"input-field сol s12"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.y),expression:"y"}],attrs:{"id":"y-coord","required":"","autocomplete":"off","placeholder":"Введите широту"},domProps:{"value":(_vm.y)},on:{"input":function($event){if($event.target.composing){ return; }_vm.y=$event.target.value}}})]),_vm._v(" "),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.isAddHash),expression:"isAddHash"}],staticClass:"filled-in",attrs:{"type":"checkbox","id":"is_add_hash"},domProps:{"checked":Array.isArray(_vm.isAddHash)?_vm._i(_vm.isAddHash,null)>-1:(_vm.isAddHash)},on:{"__c":function($event){var $$a=_vm.isAddHash,$$el=$event.target,$$c=$$el.checked?(true):(false);if(Array.isArray($$a)){var $$v=null,$$i=_vm._i($$a,$$v);if($$el.checked){$$i<0&&(_vm.isAddHash=$$a.concat([$$v]))}else{$$i>-1&&(_vm.isAddHash=$$a.slice(0,$$i).concat($$a.slice($$i+1)))}}else{_vm.isAddHash=$$c}}}}),_vm._v(" "),_c('label',{attrs:{"for":"is_add_hash"}},[_vm._v("Добавить хеш в блокчейн")]),_vm._v(" "),_c('br'),_vm._v(" "),_c('br'),_vm._v(" "),_c('button',{staticClass:"btn waves-effect green"},[_vm._v("СОЗДАТЬ")])])])])]),_vm._v(" "),_vm._m(1)])}
-__vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"file-path-wrapper"},[_c('input',{staticClass:"file-path validate",attrs:{"type":"text"}})])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('a',{staticClass:"btn-floating btn-large waves-effect waves-light green modal-trigger",attrs:{"href":"#add-info-modal"}},[_c('i',{staticClass:"material-icons"},[_vm._v("add")])])}]
+__vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"file-path-wrapper"},[_c('input',{staticClass:"file-path validate",attrs:{"type":"text"}})])},function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('a',{staticClass:"btn-floating btn-large waves-effect waves-light green modal-trigger tooltipped",attrs:{"data-position":"left","data-delay":"50","data-tooltip":"добавить маркер","href":"#add-info-modal"}},[_c('i',{staticClass:"material-icons"},[_vm._v("add")])])}]
 __vue__options__._scopeId = "data-v-290c3596"
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -338,7 +338,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-290c3596", __vue__options__)
   } else {
-    hotAPI.reload("data-v-290c3596", __vue__options__)
+    hotAPI.rerender("data-v-290c3596", __vue__options__)
   }
 })()}
 },{"vue":81,"vue-hot-reload-api":80,"vueify/lib/insert-css":82}],6:[function(require,module,exports){
@@ -383,7 +383,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-fc265d8e", __vue__options__)
   } else {
-    hotAPI.reload("data-v-fc265d8e", __vue__options__)
+    hotAPI.rerender("data-v-fc265d8e", __vue__options__)
   }
 })()}
 },{"./AddInfoModal.vue":5,"./EthereumModal.vue":7,"./Forest.vue":8,"./Loader.vue":9,"./MapForests.vue":10,"./Navigation.vue":11,"vue":81,"vue-hot-reload-api":80,"vueify/lib/insert-css":82}],7:[function(require,module,exports){
@@ -418,7 +418,7 @@ if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
 __vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('div',{staticClass:"modal",attrs:{"id":"ethereum-key-modal"}},[_c('div',{staticClass:"modal-content"},[_c('h4',[_vm._v("Ethereum ключ")]),_vm._v(" "),_c('p',[_vm._v("Введите ваш Ethereum ключ, чтобы получить доступ к информации о лесах.")]),_vm._v(" "),_c('form',{staticClass:"col s12",on:{"submit":function($event){$event.preventDefault();_vm.enterKey($event)}}},[_c('div',{staticClass:"input-field"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.key),expression:"key"}],staticClass:"validate",attrs:{"id":"ethereum-key","autocomplete":"off","data-error":"wrong","placeholder":"Введите ключ","data-success":"right"},domProps:{"value":(_vm.key)},on:{"input":function($event){if($event.target.composing){ return; }_vm.key=$event.target.value}}})])])])]),_vm._v(" "),_vm._m(0)])}
-__vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('a',{staticClass:"btn-floating btn-large waves-effect waves-light green modal-trigger",attrs:{"href":"#ethereum-key-modal"}},[_c('i',{staticClass:"material-icons"},[_vm._v("account_balance_wallet")])])}]
+__vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('a',{staticClass:"btn-floating btn-large waves-effect waves-light green modal-trigger tooltipped",attrs:{"data-position":"left","data-delay":"50","data-tooltip":"Ввести ethereum ключ","href":"#ethereum-key-modal"}},[_c('i',{staticClass:"material-icons"},[_vm._v("account_balance_wallet")])])}]
 __vue__options__._scopeId = "data-v-7da0e18e"
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -428,7 +428,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-7da0e18e", __vue__options__)
   } else {
-    hotAPI.reload("data-v-7da0e18e", __vue__options__)
+    hotAPI.rerender("data-v-7da0e18e", __vue__options__)
   }
 })()}
 },{"../store":4,"vue":81,"vue-hot-reload-api":80,"vueify/lib/insert-css":82}],8:[function(require,module,exports){
@@ -473,7 +473,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-42610996", __vue__options__)
   } else {
-    hotAPI.reload("data-v-42610996", __vue__options__)
+    hotAPI.rerender("data-v-42610996", __vue__options__)
   }
 })()}
 },{"vue":81,"vue-hot-reload-api":80,"vueify/lib/insert-css":82}],9:[function(require,module,exports){
@@ -490,11 +490,11 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-65ade42b", __vue__options__)
   } else {
-    hotAPI.reload("data-v-65ade42b", __vue__options__)
+    hotAPI.rerender("data-v-65ade42b", __vue__options__)
   }
 })()}
 },{"vue":81,"vue-hot-reload-api":80,"vueify/lib/insert-css":82}],10:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("#map {\n    height: 100vh;\n    width: 100vw;\n}")
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("#map[data-v-6a7c8392] {\n  height: 100vh;\n  width: 100vw;\n}\na.btn-floating[data-v-6a7c8392] {\n  position: absolute;\n  bottom: 185px;\n  right: 25px;\n}")
 ;(function(){
 'use strict';
 
@@ -507,7 +507,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 module.exports = {
   data: function data() {
     return {
-      googleMarkers: {}
+      googleMarkers: {},
+      iconInvalidMarkers: 'visibility_off'
     };
   },
 
@@ -520,7 +521,6 @@ module.exports = {
       var data = this.$store.state.showMarker;
       if (!data) return;
       var marker = this.googleMarkers[data.hash];
-      console.log(data.hash);
       this.map.setCenter(marker.getPosition());
       this.$store.dispatch('loadInfo', data.hash);
       marker.setAnimation(google.maps.Animation.BOUNCE);
@@ -531,6 +531,19 @@ module.exports = {
     }
   },
   methods: {
+    toggleInvalidMarkers: function toggleInvalidMarkers() {
+      if (this.iconInvalidMarkers === 'visibility') {
+        this.iconInvalidMarkers = 'visibility_off';
+        for (var key in this.googleMarkers) {
+          if (!this.googleMarkers[key].isValid) this.googleMarkers[key].setVisible(false);
+        }
+      } else {
+        this.iconInvalidMarkers = 'visibility';
+        for (var _key in this.googleMarkers) {
+          if (!this.googleMarkers[_key].isValid) this.googleMarkers[_key].setVisible(true);
+        }
+      }
+    },
     addMarkers: function addMarkers(markers) {
       var _this = this;
 
@@ -545,11 +558,14 @@ module.exports = {
           icon: markers[key].is_valid ? '../static/img/valid_marker.png' : '../static/img/not_valid_marker.png'
         });
 
-        count++;
-        setTimeout(function () {
-          marker.visible = true;
-          marker.setAnimation(google.maps.Animation.DROP);
-        }, count * 100);
+        marker.isValid = markers[key].is_valid;
+        if (marker.isValid) {
+          count++;
+          setTimeout(function () {
+            marker.visible = true;
+            marker.setAnimation(google.maps.Animation.DROP);
+          }, count * 100);
+        }
 
         if ((0, _keys2.default)(markers).length === 1) _this.map.setCenter(marker.getPosition());
 
@@ -595,8 +611,9 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"map","watch":_vm.newMarkers,"watch2":_vm.showMarker}})}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('div',{attrs:{"id":"map","watch":_vm.newMarkers,"watch2":_vm.showMarker}}),_vm._v(" "),_c('a',{staticClass:"btn-floating btn-large waves-effect waves-light green tooltipped",attrs:{"data-position":"left","data-delay":"50","data-tooltip":"вкл/выкл эмулированные маркеры"},on:{"click":_vm.toggleInvalidMarkers}},[_c('i',{staticClass:"material-icons"},[_vm._v(_vm._s(_vm.iconInvalidMarkers))])])])}
 __vue__options__.staticRenderFns = []
+__vue__options__._scopeId = "data-v-6a7c8392"
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
@@ -641,7 +658,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-575655ac", __vue__options__)
   } else {
-    hotAPI.reload("data-v-575655ac", __vue__options__)
+    hotAPI.rerender("data-v-575655ac", __vue__options__)
   }
 })()}
 },{"vue":81,"vue-hot-reload-api":80,"vueify/lib/insert-css":82}],12:[function(require,module,exports){

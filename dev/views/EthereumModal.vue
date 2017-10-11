@@ -11,7 +11,7 @@
         </form>
       </div>
     </div>
-    <a class="btn-floating btn-large waves-effect waves-light green modal-trigger" href="#ethereum-key-modal"><i class="material-icons">account_balance_wallet</i></a>
+    <a class="btn-floating btn-large waves-effect waves-light green modal-trigger tooltipped" data-position="left"  data-delay="50" data-tooltip="Ввести ethereum ключ"  href="#ethereum-key-modal"><i class="material-icons">account_balance_wallet</i></a>
   </div>
 </template>
 

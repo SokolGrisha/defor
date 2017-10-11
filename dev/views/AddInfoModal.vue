@@ -31,7 +31,7 @@
         </div>
       </div>
     </div>
-    <a class="btn-floating btn-large waves-effect waves-light green modal-trigger" href="#add-info-modal"><i class="material-icons">add</i></a>
+    <a class="btn-floating btn-large waves-effect waves-light green modal-trigger tooltipped" data-position="left"  data-delay="50" data-tooltip="добавить маркер" href="#add-info-modal"><i class="material-icons">add</i></a>
   </div>
 </template>
 

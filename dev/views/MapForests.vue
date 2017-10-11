@@ -1,12 +1,16 @@
 <template>
-  <div id="map" :watch="newMarkers" :watch2="showMarker"></div>
+  <div>
+    <div id="map" :watch="newMarkers" :watch2="showMarker"></div>
+    <a class="btn-floating btn-large waves-effect waves-light green tooltipped" data-position="left"  data-delay="50" data-tooltip="вкл/выкл эмулированные маркеры" @click="toggleInvalidMarkers"><i class="material-icons">{{iconInvalidMarkers}}</i></a>
+  </div>
 </template>
 
 <script>
   module.exports = {
     data() {
       return {
-        googleMarkers: {}
+        googleMarkers: {},
+        iconInvalidMarkers: 'visibility_off'
       }
     },
     computed: {
@@ -18,7 +22,6 @@
         let data = this.$store.state.showMarker;
         if(!data) return;
         let marker = this.googleMarkers[data.hash];
-        console.log(data.hash);
         this.map.setCenter(marker.getPosition());
         this.$store.dispatch('loadInfo', data.hash);
         marker.setAnimation(google.maps.Animation.BOUNCE);
@@ -29,6 +32,19 @@
       }
     },
     methods: {
+      toggleInvalidMarkers() {
+        if(this.iconInvalidMarkers === 'visibility') {
+          this.iconInvalidMarkers = 'visibility_off';
+          for(let key in this.googleMarkers) {
+            if(!this.googleMarkers[key].isValid) this.googleMarkers[key].setVisible(false);
+          }
+        } else {
+          this.iconInvalidMarkers = 'visibility';
+          for(let key in this.googleMarkers) {
+            if(!this.googleMarkers[key].isValid) this.googleMarkers[key].setVisible(true);
+          }
+        }
+      },
       addMarkers(markers) {
         let count = 0;
         for(let key in markers) {
@@ -40,11 +56,14 @@
             icon: markers[key].is_valid ? '../static/img/valid_marker.png' : '../static/img/not_valid_marker.png'
           });
 
-          count++;
-          setTimeout(() => {
-            marker.visible = true;
-            marker.setAnimation(google.maps.Animation.DROP);
-          }, count*100);
+          marker.isValid = markers[key].is_valid;
+          if(marker.isValid) {
+            count++;
+            setTimeout(() => {
+              marker.visible = true;
+              marker.setAnimation(google.maps.Animation.DROP);
+            }, count*100);
+          }
 
           if(Object.keys(markers).length === 1)
             this.map.setCenter(marker.getPosition());
@@ -84,9 +103,14 @@
   }
 </script>
 
-<style lang="css">
+<style scoped>
   #map {
-      height: 100vh;
-      width: 100vw;
+    height: 100vh;
+    width: 100vw;
+  }
+  a.btn-floating {
+    position: absolute;
+    bottom: 185px;
+    right: 25px;
   }
 </style>
