@@ -21,7 +21,7 @@ def get_points():
 		info = database.get("hash:%s" % point)
 
 		if info is  not None:
-			result[point] = {"x":info["x"], "y":info["y"], info.get("is_valid", True)}
+			result[point] = {"x":info["x"], "y":info["y"], "is_valid":info.get("is_valid", True)}
 
 	return json.dumps(result), 200
 
