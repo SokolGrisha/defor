@@ -11,7 +11,7 @@
         </form>
       </div>
     </div>
-    <a class="btn-floating btn-large waves-effect waves-light red modal-trigger" href="#ethereum-key-modal"><i class="material-icons">account_balance_wallet</i></a>
+    <a class="btn-floating btn-large waves-effect waves-light green modal-trigger" href="#ethereum-key-modal"><i class="material-icons">account_balance_wallet</i></a>
   </div>
 </template>
 
@@ -31,8 +31,8 @@
       }
     },
     mounted() {
-      $('.modal').modal({
-        endingTop: '5%'
+      $('#ethereum-key-modal').modal({
+        endingTop: '20%'
       });
       $('#ethereum-key-modal').modal('open');
     }
@@ -42,7 +42,7 @@
 <style scoped>
   a.btn-floating {
     position: absolute;
-    bottom: 25px;
+    bottom: 35px;
     right: 25px;
   }
 </style>

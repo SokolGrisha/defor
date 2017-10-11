@@ -74,7 +74,7 @@
           mapTypeControl: false,
           scaleControl: false,
           draggable: true,
-          mapTypeId: 'hybrid',
+          mapTypeId: 'satellite',
           disableDefaultUI: true
         });
 
@@ -86,6 +86,7 @@
 
 <style lang="css">
   #map {
-    height: 100%;
+      height: 100vh;
+      width: 100vw;
   }
 </style>

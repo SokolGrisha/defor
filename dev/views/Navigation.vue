@@ -1,6 +1,6 @@
 <template>
   <nav>
-    <div class="nav-wrapper green darken-2 ">
+    <div class="nav-wrapper green">
       <div class="container">
         <div class="row">
           <div class="col s8">
@@ -42,6 +42,11 @@
     top: 0;
     left: 0;
     z-index: 10;
+  }
+  #search:focus {
+    border-bottom: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
   }
   .container {
     height: 100%;

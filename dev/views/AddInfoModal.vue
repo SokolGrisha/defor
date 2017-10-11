@@ -3,6 +3,7 @@
     <div id="add-info-modal" class="modal">
       <div class="modal-content">
         <h4>Новый маркер</h4>
+        <br>
         <div class="row">
             <div class="file-field input-field">
               <div class="btn green">
@@ -23,7 +24,7 @@
           </div>
       </div>
     </div>
-    <a class="btn-floating btn-large waves-effect waves-light red modal-trigger" href="#add-info-modal"><i class="material-icons">add</i></a>
+    <a class="btn-floating btn-large waves-effect waves-light green modal-trigger" href="#add-info-modal"><i class="material-icons">add</i></a>
   </div>
 </template>
 
@@ -56,6 +57,11 @@
         this.$store.commit('loading', true);
         reader.readAsDataURL(files[0]);
       }
+    },
+    mounted() {
+      $('#add-info-modal').modal({
+        endingTop: '20%'
+      });
     }
   }
 </script>
@@ -63,7 +69,7 @@
 <style scoped>
   a.btn-floating {
     position: absolute;
-    bottom: 100px;
+    bottom: 110px;
     right: 25px;
   }
 </style>

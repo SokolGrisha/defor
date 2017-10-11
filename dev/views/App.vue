@@ -2,11 +2,7 @@
   <div id="app">
     <navigation></navigation>
 
-    <div class="container">
-      <div class="card">
-        <map-forests></map-forests>
-      </div>
-    </div>
+    <map-forests></map-forests>
 
     <forest></forest>
     <ethereum-modal></ethereum-modal>
@@ -45,12 +41,5 @@
   #app {
     min-height: 100vh;
     overflow: hidden;
-  }
-  .container {
-    margin-top: 140px;
-  }
-  .card {
-    width: 100%;
-    height: 70vh;
   }
 </style>
