@@ -8,7 +8,7 @@ module.exports = {
     ethAPI: new EthAPI(ethContract.adress, ethContract.contract),
     ethKey: '',
     ethAdress: '',
-    rootApi: 'https://deforest.herokuapp.com',
+    rootApi: '',
     loading: false,
     markers: {},
     newMarkers: {},
