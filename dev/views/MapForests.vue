@@ -37,14 +37,14 @@
             map: this.map,
             visible: false,
             title: key,
-            icon: '../static/img/marker.png'
+            icon: markers[key].is_valid ? '../static/img/valid_marker.png' : '../static/img/not_valid_marker.png'
           });
 
           count++;
           setTimeout(() => {
-            marker.setAnimation(google.maps.Animation.Zo);
             marker.visible = true;
-          }, count*300);
+            marker.setAnimation(google.maps.Animation.DROP);
+          }, count*100);
 
           if(Object.keys(markers).length === 1)
             this.map.setCenter(marker.getPosition());

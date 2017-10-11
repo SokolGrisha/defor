@@ -5,23 +5,30 @@
         <h4>Новый маркер</h4>
         <br>
         <div class="row">
+          <form @submit.prevent="submitNewInfo">
             <div class="file-field input-field">
               <div class="btn green">
                 <span>Фотография</span>
-                <input type="file" @change="onFileChange">
+                <input type="file" @change="onFileChange" required>
               </div>
               <div class="file-path-wrapper">
                 <input class="file-path validate" type="text">
               </div>
             </div>
             <div class="input-field сol s12">
-              <input id="x-coord" v-model="x" autocomplete="off" placeholder="Введите долготу">
+              <input id="x-coord" v-model="x" required autocomplete="off" placeholder="Введите долготу">
             </div>
             <div class="input-field сol s12">
-              <input id="y-coord" v-model="y" autocomplete="off" placeholder="Введите широту">
+              <input id="y-coord" v-model="y" required autocomplete="off" placeholder="Введите широту">
             </div>
-            <button class="btn waves-effect green" @click="submitNewInfo">СОЗДАТЬ</button>
-          </div>
+
+            <input type="checkbox" class="filled-in" id="is_add_hash" v-model="isAddHash"/>
+            <label for="is_add_hash">Добавить хеш в блокчейн</label>
+            <br>
+            <br>
+            <button class="btn waves-effect green">СОЗДАТЬ</button>
+          </form>
+        </div>
       </div>
     </div>
     <a class="btn-floating btn-large waves-effect waves-light green modal-trigger" href="#add-info-modal"><i class="material-icons">add</i></a>
@@ -32,18 +39,20 @@
   module.exports = {
     data() {
       return {
-        base64: '', x: '', y: ''
+        base64: '',
+        x: '',
+        y: '',
+        isAddHash: true
       }
     },
     methods: {
       submitNewInfo() {
-        if(!this.base64 || !this.x || !this.y) {
-          Materialize.toast('Заполнены не все поля.', 1000);
-          return;
+        if(this.x.match(/^-?\d+\.?\d*$/) && this.y.match(/^-?\d+\.?\d*$/)) {
+          $('#add-info-modal').modal('close');
+          this.$store.dispatch('addInfo', {base64: this.base64, y: +this.y, x: +this.x, isValid: this.isAddHash});
+        } else {
+          Materialize.toast('Некорректно указаны координаты', 3000);
         }
-
-        $('#add-info-modal').modal('close');
-        this.$store.dispatch('addInfo', {base64: this.base64, y: this.y, x: this.x});
       },
       onFileChange(e) {
         var files = e.target.files || e.dataTransfer.files;

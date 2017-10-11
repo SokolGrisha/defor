@@ -8,7 +8,7 @@ module.exports = {
     ethAPI: new EthAPI(ethContract.adress, ethContract.contract),
     ethKey: '',
     ethAdress: '',
-    rootApi: '',
+    rootApi: 'https://deforest.herokuapp.com',
     loading: false,
     markers: {},
     newMarkers: {},
@@ -56,40 +56,45 @@ module.exports = {
       }
       Materialize.toast(`По координатам x: ${x}, y: ${y} маркера не найдено`, 3000);
     },
-    addInfo({state, commit}, {x, y, base64}) {
+    addInfoToServer({state, commit}, data) {
+      axios.post(state.rootApi + '/add_info', data).then(
+        response => {
+          if(data.is_valid) Materialize.toast('Новый маркер создан!', 3000);
+          else Materialize.toast('Эмулированный маркер создан!', 3000);
+
+          if(data.is_valid) Materialize.toast('Подождите, пока хеш будет замайнен.', 3000);
+          commit('loading', false);
+          commit('newMarkers', {[data.hash]: {x: data.x, y: data.y}});
+        },
+        response => {
+          Materialize.toast('Не удалось создать новый маркер.', 3000);
+          commit('loading', false);
+        }
+      );
+    },
+    addInfo({state, commit, dispatch}, {x, y, base64, isValid}) {
       let date = +new Date;
       let hash = sha256(base64+x+y+date);
 
       commit('loading', true);
-      Materialize.toast('Создается новая запись в блокчейне', 3000);
+      if(isValid) {
+        Materialize.toast('Создается новая запись в блокчейне', 3000);
 
-      try {
-        state.ethAPI.add({
-          addHash: hash,
-          key: state.ethKey,
-          fromAdress: state.ethAdress,
-
-          resolve: (data) => {
-            axios.post(state.rootApi + '/add_info', {x, y, image: base64, date}).then(
-              response => {
-                Materialize.toast('Новый маркер создан!', 3000);
-                Materialize.toast('Подождите, пока хеш будет замайнен.', 3000);
-                commit('loading', false);
-                commit('newMarkers', {[hash]: {x: +x, y: +y}});
-              },
-              response => {
-                Materialize.toast('Не удалось создать новый маркер.', 3000);
-                commit('loading', false);
-              }
-            );
-          },
-          reject: (err) => {
-            Materialize.toast('Ошибка. Не получилось создать запись.', 3000);
-          }
-        });
-      } catch(e) {
-        Materialize.toast('Ошибка. Скорее всего ключ указан не верно.', 3000);
-        commit('loading', false);
+        try {
+          state.ethAPI.add({
+            addHash: hash,
+            key: state.ethKey,
+            fromAdress: state.ethAdress,
+            resolve: (data) => dispatch('addInfoToServer', {image: base64, date, x, y, hash, is_valid: true}),
+            reject: (err) => Materialize.toast('Ошибка. Не получилось создать запись.', 3000)
+          });
+        } catch(e) {
+          Materialize.toast('Ошибка. Скорее всего ключ указан не верно.', 3000);
+          commit('loading', false);
+        }
+      } else {
+        Materialize.toast('Эмулируем подмену данных (без добавления хеша в блокчейн)', 3000);
+        dispatch('addInfoToServer', {image: base64, date, x, y, hash, is_valid: false});
       }
     },
     loadInfo({commit, state}, hash) {
